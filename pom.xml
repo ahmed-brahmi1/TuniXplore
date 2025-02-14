@@ -46,7 +46,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.esprit.controllers.Home</mainClass>
+                    <mainClass>com.esprit.controllers.User.Home</mainClass>
                 </configuration>
 
 
