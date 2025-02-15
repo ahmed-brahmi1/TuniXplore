@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controllers.Voiture.HomeListVoitureController">
+
+    <VBox spacing="15" alignment="TOP_CENTER" style="-fx-padding: 20px;" prefWidth="1000" prefHeight="700">
+
+        <!-- Barre supérieure avec nom du client et mode sombre -->
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: #2c3e50; -fx-padding: 15px; -fx-border-radius: 10px;">
+            <Label fx:id="clientNomLabel" text="Nom du Client : Mohamed" style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+            <Label fx:id="clientIdLabel" text="ID: 123456" style="-fx-text-fill: white; -fx-font-size: 16px;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="modeSombreButton" text="🌙 Mode Sombre" onAction="#toggleModeSombre"
+                    style="-fx-background-color: #ecf0f1; -fx-text-fill: #2c3e50; -fx-font-size: 14px; -fx-padding: 8px 12px; -fx-background-radius: 20px;"/>
+        </HBox>
+
+        <!-- Barre de recherche pleine largeur -->
+        <TextField fx:id="searchField" promptText="Rechercher une voiture..."
+                   style="-fx-font-size: 16px; -fx-padding: 10px; -fx-background-radius: 8px;"
+                   VBox.vgrow="NEVER"/>
+
+        <!-- Section des filtres -->
+        <HBox spacing="10" alignment="CENTER" HBox.hgrow="ALWAYS">
+            <ComboBox fx:id="marqueFilter" promptText="Marque" HBox.hgrow="ALWAYS"/>
+            <ComboBox fx:id="statutFilter" promptText="Statut" HBox.hgrow="ALWAYS"/>
+            <Slider fx:id="prixSlider" min="0" max="500" value="500" HBox.hgrow="ALWAYS"/>
+            <Label fx:id="prixLabel" text="Max: 500 TND"/>
+            <TextField fx:id="anneeFilter" promptText="Année" HBox.hgrow="ALWAYS"/>
+            <Button text="🔍 Filtrer" fx:id="filtrerButton" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
+        <!-- Grille des voitures -->
+        <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS">
+            <GridPane fx:id="voituresGrid" hgap="20" vgap="20" style="-fx-padding: 15px;"
+                      GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+            </GridPane>
+        </ScrollPane>
+
+    </VBox>
+</AnchorPane>

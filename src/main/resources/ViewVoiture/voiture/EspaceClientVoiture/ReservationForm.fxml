@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controllers.Voiture.ReservationFormController"
+            prefWidth="700" prefHeight="900">
+
+    <!-- Image de fond avec flou -->
+    <ImageView fitHeight="850" fitWidth="700" opacity="0.4" preserveRatio="false">
+        <Image url="@../images/carbackground.jpg" />
+    </ImageView>
+
+    <!-- Formulaire centré -->
+    <VBox spacing="20" alignment="CENTER"
+          style="-fx-padding: 30px;"
+          prefWidth="700" prefHeight="650">
+
+        <!-- En-tête -->
+        <Label text="📝 Formulaire de Réservation"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+        <!-- Informations de la voiture -->
+        <VBox spacing="10" alignment="CENTER"
+              style="-fx-background-color: white; -fx-padding: 20px;
+                     -fx-border-radius: 10px; -fx-background-radius: 10px;
+                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 2);"
+              prefWidth="600">
+
+            <Label text="🚗 Marque :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <TextField fx:id="marqueField" editable="false"
+                       style="-fx-padding: 12px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+
+            <Label text="📌 Modèle :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <TextField fx:id="modeleField" editable="false"
+                       style="-fx-padding: 12px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+
+            <Label text="🆔 ID :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <TextField fx:id="idField" editable="false"
+                       style="-fx-padding: 12px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+
+            <Label text="⚙️ Statut :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <TextField fx:id="statutField" editable="false"
+                       style="-fx-padding: 12px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+
+            <Label text="💰 Prix (TND/Jour) :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <TextField fx:id="prixField" editable="false"
+                       style="-fx-padding: 12px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+
+            <CheckBox fx:id="conducteurCheckBox" text="Ajouter un conducteur (+ coût supplémentaire)"
+                      style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+        </VBox>
+
+
+
+        <Label fx:id="prixFinalLabel" text="Prix Final: 0 TND" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: red;"/>
+
+        <!-- Formulaire de réservation -->
+        <VBox spacing="10" alignment="CENTER" style="-fx-padding: 15px;" prefWidth="600">
+
+            <Label text="👤 Nom du client :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <TextField fx:id="nomClientField" promptText="Entrez votre nom"
+                       style="-fx-padding: 14px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+
+            <Label text="📅 Date de début :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <DatePicker fx:id="dateDebutPicker"
+                        style="-fx-padding: 12px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+
+            <Label text="📅 Date de fin :" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+            <DatePicker fx:id="dateFinPicker"
+                        style="-fx-padding: 12px; -fx-background-radius: 8px; -fx-font-size: 16px;"/>
+        </VBox>
+
+        <!-- Boutons d’action -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="✔ Confirmer" fx:id="confirmerButton"
+                    style="-fx-background-color: #27ae60; -fx-text-fill: white;
+                           -fx-font-size: 18px; -fx-font-weight: bold;
+                           -fx-padding: 14px 24px; -fx-background-radius: 10px; -fx-cursor: hand;"/>
+
+            <Button text="❌ Annuler" fx:id="annulerButton" onAction="#annulerReservation"
+                    style="-fx-background-color: #c0392b; -fx-text-fill: white;
+                           -fx-font-size: 18px; -fx-font-weight: bold;
+                           -fx-padding: 14px 24px; -fx-background-radius: 10px;
+                           -fx-cursor: hand;"/>
+
+        </HBox>
+
+    </VBox>
+</AnchorPane>

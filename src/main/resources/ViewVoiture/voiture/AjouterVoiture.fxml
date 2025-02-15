@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Voiture.AjouterVoitureController">
+
+    <!-- Conteneur principal -->
+    <StackPane prefHeight="Infinity" prefWidth="Infinity" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+
+        <!-- Image de fond avec flou -->
+        <ImageView fitHeight="700" fitWidth="1000" opacity="0.3" preserveRatio="false">
+            <Image url="@../images/voiture.jpg" />
+        </ImageView>
+
+        <!-- Formulaire centré -->
+        <VBox alignment="CENTER" maxHeight="600" maxWidth="600" spacing="20" style="-fx-padding: 40px;                      -fx-background-color: #ffffff;                      -fx-background-radius: 15px;                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);">
+
+            <!-- Titre -->
+            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Ajouter une Voiture" />
+
+            <!-- Formulaire -->
+            <VBox maxWidth="500" spacing="15">
+                <HBox spacing="15">
+                    <Label prefHeight="25.0" prefWidth="91.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Marque:" />
+                    <TextField fx:id="marqueField" prefWidth="350" style="-fx-background-color: #ecf0f1;" />
+                </HBox>
+
+                <HBox spacing="15">
+                    <Label prefHeight="25.0" prefWidth="91.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Modèle:" />
+                    <TextField fx:id="modeleField" prefWidth="350" style="-fx-background-color: #ecf0f1;" />
+                </HBox>
+
+                <HBox spacing="15">
+                    <Label prefHeight="25.0" prefWidth="91.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Année:" />
+                    <TextField fx:id="anneeField" prefHeight="25.0" prefWidth="351.0" style="-fx-background-color: #ecf0f1;" />
+                </HBox>
+
+                <HBox spacing="15">
+                    <Label prefHeight="25.0" prefWidth="92.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Prix / Jour:" />
+                    <TextField fx:id="prixField" prefWidth="350" style="-fx-background-color: #ecf0f1;" />
+                </HBox>
+
+                <HBox spacing="15">
+                    <Label prefHeight="25.0" prefWidth="92.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Conducteur" />
+                    <TextField fx:id="conducteurSupplementaireField" prefWidth="350" style="-fx-background-color: #ecf0f1; -fx-background-radius: 8px;"/>
+                </HBox>
+
+                <HBox spacing="15">
+                    <Label prefHeight="25.0" prefWidth="92.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Statut:" />
+                    <ComboBox fx:id="statutComboBox" prefWidth="350" style="-fx-background-color: #ecf0f1;">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Disponible" />
+                                <String fx:value="Réservée" />
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                </HBox>
+            </VBox>
+
+            <!-- Section image -->
+            <HBox alignment="CENTER" centerShape="false" prefHeight="100.0" prefWidth="509.0" spacing="15">
+                <Label prefHeight="25.0" prefWidth="132.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Image :" />
+                <ImageView fx:id="voitureImageView" fitHeight="100" fitWidth="197.0" style="-fx-border-color: #7f8c8d; -fx-border-width: 1px;" />
+                <Button fx:id="choisirImageButton" onAction="#choisirImage" prefHeight="30.0" prefWidth="136.0" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-size: 14px;" text="Choisir Image" />
+            </HBox>
+
+
+
+            <!-- Boutons avec effet hover -->
+            <HBox alignment="CENTER" spacing="30">
+                <Button fx:id="ajouterButton" onAction="#ajouterVoiture" onMouseEntered="#handleMouseEnteredAjouter" onMouseExited="#handleMouseExitedAjouter" style="-fx-background-color: #27ae60; -fx-text-fill: white;" prefWidth="150" prefHeight="50"  text="Ajouter" />
+
+                <Button fx:id="annulerButton" onAction="#ouvrirListeVoitures" onMouseEntered="#handleMouseEnteredAnnuler" onMouseExited="#handleMouseExitedAnnuler" style="-fx-background-color: #c0392b; -fx-text-fill: white;" prefWidth="150" prefHeight="50"  text="Annuler" />
+
+                <Button fx:id="voirListeButton" onAction="#ouvrirListeVoitures" onMouseEntered="#handleMouseEnteredVoirListe" onMouseExited="#handleMouseExitedVoirListe" style="-fx-background-color: #2980b9; -fx-text-fill: white;" prefWidth="150" prefHeight="50" text="Voir Liste" />
+
+            </HBox>
+
+        </VBox>
+
+    </StackPane>
+
+</AnchorPane>
