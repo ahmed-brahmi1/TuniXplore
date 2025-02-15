@@ -27,6 +27,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 public class HomeListVoitureController {
 
     @FXML
@@ -51,6 +52,10 @@ public class HomeListVoitureController {
     private final ServiceVoiture serviceVoiture = new ServiceVoiture();
     private ObservableList<Voiture> voituresList = FXCollections.observableArrayList();
 
+
+
+
+
     @FXML
     public void initialize() {
         chargerVoitures();
@@ -58,6 +63,9 @@ public class HomeListVoitureController {
         chargerFiltres();
 
     }
+
+
+
 
     private void chargerVoitures() {
         voituresList.setAll(serviceVoiture.recupererToutes());
@@ -118,9 +126,9 @@ public class HomeListVoitureController {
         card.setAlignment(Pos.CENTER);
         card.setStyle("-fx-background-color: white; -fx-border-radius: 10px; -fx-padding: 10px; -fx-border-color: #ddd;");
 
-        // 💡 Appliquer un effet d'ombre DropShadow
+        // 💡 Effet d'ombre pour un design plus moderne
         DropShadow shadow = new DropShadow();
-        shadow.setColor(Color.rgb(0, 0, 0, 0.3)); // Ombre noire 30% d'opacité
+        shadow.setColor(Color.rgb(0, 0, 0, 0.3));
         shadow.setRadius(10);
         shadow.setOffsetX(4);
         shadow.setOffsetY(4);
@@ -140,19 +148,25 @@ public class HomeListVoitureController {
         Label conducteurPrice = new Label("Conducteur suppl.: " + voiture.getConducteurSupplementaire() + " TND");
         conducteurPrice.setStyle("-fx-text-fill: blue;");
 
-        Button viewButton = new Button("👁 Voir");
         Button reserverButton = new Button("📅 Réserver");
 
-// Ajouter les actions aux boutons
-        viewButton.setOnAction(event -> voirDetailsVoiture(voiture));
-        reserverButton.setOnAction(event -> reserverVoiture(event,voiture));
+        // ✅ Désactiver le bouton "Réserver" si la voiture est déjà réservée
+        if ("Réservée".equalsIgnoreCase(voiture.getStatut())) {
+            reserverButton.setDisable(true);
+            reserverButton.setText("⛔ Indisponible");
+            reserverButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-cursor: default;");
+        } else {
+            reserverButton.setOnAction(event -> reserverVoiture(event, voiture));
+        }
 
-        HBox buttonBox = new HBox(10, viewButton, reserverButton);
+
+        HBox buttonBox = new HBox(10, reserverButton);
         buttonBox.setAlignment(Pos.CENTER);
 
-        card.getChildren().addAll(carImage, carMarque, carModel, carPrice,conducteurPrice, buttonBox);
+        card.getChildren().addAll(carImage, carMarque, carModel, carPrice, conducteurPrice, buttonBox);
         return card;
     }
+
 
     private void reserverVoiture(javafx.event.ActionEvent event, Voiture voiture) {
         try {
@@ -190,10 +204,6 @@ public class HomeListVoitureController {
         }
     }
 
-
-    private void voirDetailsVoiture(Voiture voiture) {
-        showAlert(Alert.AlertType.INFORMATION, "Détails Voiture", "Marque : " + voiture.getMarque() + "\nModèle : " + voiture.getModele());
-    }
 
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
@@ -255,6 +265,20 @@ public class HomeListVoitureController {
         modeSombreActive = !modeSombreActive;
     }
 
+
+    @FXML
+    private void afficherReservations() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewVoiture/voiture/EspaceClientVoiture/ListeReservations.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Mes Réservations");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 

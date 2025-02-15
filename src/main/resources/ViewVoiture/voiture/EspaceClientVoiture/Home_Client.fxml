@@ -2,7 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.image.ImageView?>
+
+
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
@@ -34,12 +35,17 @@
             <Button text="🔍 Filtrer" fx:id="filtrerButton" HBox.hgrow="ALWAYS"/>
         </HBox>
 
+        <Button text="📄 Mes Réservations" onAction="#afficherReservations"
+                style="-fx-background-color: #3498db; -fx-text-fill: white;
+               -fx-font-size: 16px; -fx-padding: 10px; -fx-background-radius: 8px;"/>
+
         <!-- Grille des voitures -->
         <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS">
             <GridPane fx:id="voituresGrid" hgap="20" vgap="20" style="-fx-padding: 15px;"
                       GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
             </GridPane>
         </ScrollPane>
+
 
     </VBox>
 </AnchorPane>

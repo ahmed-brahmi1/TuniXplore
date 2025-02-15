@@ -98,4 +98,35 @@ public class ServiceVoiture {
         }
         return voitures;
     }
+
+    public Voiture getVoitureById(int voitureId) {
+        System.out.println("🛠 Recherche de la voiture avec ID: " + voitureId);
+        String query = "SELECT * FROM voitures WHERE id = ?";
+
+        try {
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, voitureId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                System.out.println("✅ Voiture trouvée: " + rs.getString("marque") + " " + rs.getString("modele"));
+                return new Voiture(
+                        rs.getInt("id"),
+                        rs.getString("marque"),
+                        rs.getString("modele"),
+                        rs.getInt("annee"),
+                        rs.getDouble("prix_par_jour"),
+                        rs.getString("statut"),
+                        rs.getString("image_path"),
+                        rs.getDouble("conducteur_supplementaire")
+                );
+            } else {
+                System.out.println("⚠️ Aucune voiture trouvée pour l'ID: " + voitureId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

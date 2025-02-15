@@ -10,4 +10,6 @@ module PIDEV {
     exports com.esprit.test;
     opens com.esprit.controllers.Voiture to javafx.fxml;
 
+    opens com.esprit.models to javafx.base;
+
 }

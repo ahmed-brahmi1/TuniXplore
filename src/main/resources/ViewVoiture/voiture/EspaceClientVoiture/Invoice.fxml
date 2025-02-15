@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.esprit.controllers.Voiture.InvoiceController">
+    <VBox alignment="CENTER" spacing="20">
+        <padding>
+            <Insets bottom="30" left="50" right="50" top="30" />
+        </padding>
+
+        <!-- Titre avec une icône -->
+        <HBox alignment="CENTER" spacing="10">
+
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Facture de Réservation" />
+        </HBox>
+
+        <!-- Cadre contenant la facture -->
+        <VBox alignment="CENTER" spacing="15"
+              style="-fx-border-color: #ccc; -fx-border-width: 2; -fx-padding: 20px;
+             -fx-background-color: #ffffff; -fx-border-radius: 8px;
+             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);">
+
+            <GridPane alignment="CENTER" hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" minWidth="180"/>
+                    <ColumnConstraints halignment="LEFT" minWidth="250"/>
+                </columnConstraints>
+
+                <rowConstraints>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                    <RowConstraints minHeight="30"/>
+                </rowConstraints>
+
+                <!-- Première colonne : Labels des titres -->
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Numéro de réservation :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Client ID :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Voiture :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Date début :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Date fin :" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Conducteur supplémentaire :" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Statut :" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Prix total :" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+
+                <!-- Deuxième colonne : Labels des valeurs -->
+                <Label fx:id="lblReservationId" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label fx:id="lblClientId" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label fx:id="lblVoiture" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label fx:id="lblDateDebut" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <Label fx:id="lblDateFin" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <Label fx:id="lblConducteurSupp" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                <Label fx:id="lblStatut" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                <Label fx:id="lblPrix" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Marque :" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <Label fx:id="lblMarque" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Modèle :" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <Label fx:id="lblModele" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Année :" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <Label fx:id="lblAnnee" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Prix/Jour :" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
+                <Label fx:id="lblPrixJour" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="11" GridPane.columnIndex="1"/>
+
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Statut voiture :" GridPane.rowIndex="12" GridPane.columnIndex="0"/>
+                <Label fx:id="lblStatutVoiture" style="-fx-font-size: 16px; -fx-text-fill: #0078D7;" GridPane.rowIndex="12" GridPane.columnIndex="1"/>
+
+                <HBox alignment="CENTER" GridPane.rowIndex="13" GridPane.columnIndex="0" GridPane.columnSpan="2">
+                    <ImageView fx:id="voitureImage" fitWidth="250" fitHeight="150"/>
+                </HBox>
+
+            </GridPane>
+        </VBox>
+
+
+        <!-- Bouton de fermeture amélioré -->
+        <Button onAction="#closeWindow" style="-fx-font-size: 14px; -fx-padding: 10px 30px; -fx-background-color: #FF3B30;                        -fx-text-fill: white; -fx-border-radius: 5px; -fx-font-weight: bold;                        -fx-cursor: hand;" text="Fermer" />
+    </VBox>
+</AnchorPane>

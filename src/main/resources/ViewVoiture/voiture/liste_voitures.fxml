@@ -17,18 +17,18 @@
         </AnchorPane>
 
         <!-- Bouton Ajouter -->
-        <HBox HBox.hgrow="ALWAYS">
+        <HBox HBox.hgrow="ALWAYS" spacing="20">
             <Button fx:id="ajouterVoitureButton" text="➕ Ajouter une Voiture"
                     style="-fx-font-size: 16px; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px;"
-                    HBox.hgrow="ALWAYS"/>
-        </HBox>
+                    HBox.hgrow="NEVER"/>
 
-        <!-- Bouton pour linterface client -->
-        <HBox HBox.hgrow="ALWAYS">
+            <Region HBox.hgrow="ALWAYS"/> <!-- Espace flexible entre les boutons -->
+
             <Button fx:id="HomeClientButton" text="Session Client"
                     style="-fx-font-size: 16px; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-padding: 10px 20px;"
-                    HBox.hgrow="ALWAYS"/>
+                    HBox.hgrow="NEVER"/>
         </HBox>
+
 
         <!-- Barre de recherche pleine largeur -->
         <TextField fx:id="searchField" promptText="Rechercher..."
