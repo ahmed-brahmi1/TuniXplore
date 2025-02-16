@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.input.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.ListeVolController">
+
+
+
+
+
+    <!-- Title -->
+    <Label text="Flight Details" layoutX="20" layoutY="20"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #2A4D6A;" />
+
+    <!-- Table for Flight Details -->
+    <TableView fx:id="flightTable" layoutX="20" layoutY="60" prefWidth="760" prefHeight="300" style="-fx-border-color: #2196F3; -fx-border-width: 2px;">
+        <columns>
+            <TableColumn text="Flight ID" fx:id="flightIdColumn" prefWidth="100" />
+            <TableColumn text="Departure" fx:id="departureColumn" prefWidth="150" />
+            <TableColumn text="Destination" fx:id="destinationColumn" prefWidth="150" />
+            <TableColumn text="Departure Date" fx:id="departureDateColumn" prefWidth="150" />
+            <TableColumn text="Arrival Date" fx:id="arrivalDateColumn" prefWidth="150" />
+            <TableColumn text="Capacity" fx:id="capacityColumn" prefWidth="100" />
+            <TableColumn text="Available Seats" fx:id="availableSeatsColumn" prefWidth="100" />
+            <TableColumn text="Price" fx:id="priceColumn" prefWidth="100" />
+        </columns>
+    </TableView>
+
+    <!-- Back Button with styling -->
+    <Button text="Back" layoutX="350" layoutY="380"
+            style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px 20px;"
+            onAction="#goBack" />
+
+    <!-- Add some padding and spacing for better visual appeal -->
+    <VBox layoutX="20" layoutY="420" spacing="10">
+        <Label text="Note: Click on the table rows to view more details." style="-fx-font-size: 12px; -fx-text-fill: gray;"/>
+    </VBox>
 
 </AnchorPane>
