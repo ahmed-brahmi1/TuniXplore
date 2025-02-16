@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane fx:id="rootPane" prefHeight="800" prefWidth="1000" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.esprit.controllers.Hotel.Room.RoomListController">
+
+    <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+        <!-- Header Section -->
+        <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 20; -fx-pref-width: 100%;">
+            <Label text="🛏 Room Management" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="➕ Add Room" fx:id="addRoomButton" onAction="#addRoom"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;
+                           -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 20;"/>
+        </HBox>
+
+        <!-- Room Cards Section -->
+        <ScrollPane fitToWidth="true">
+            <HBox spacing="20" alignment="CENTER">
+                <GridPane fx:id="roomCardsPane" hgap="20" vgap="20" alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints percentWidth="33"/>
+                        <ColumnConstraints percentWidth="33"/>
+                        <ColumnConstraints percentWidth="33"/>
+                    </columnConstraints>
+                </GridPane>
+            </HBox>
+        </ScrollPane>
+    </VBox>
+</AnchorPane>

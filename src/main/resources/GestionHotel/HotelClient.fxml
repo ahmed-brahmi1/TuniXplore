@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.util.Callback?>
+<?import java.lang.String?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.esprit.controllers.Hotel.HotelClient.HotelClientController"
+            prefHeight="600.0" prefWidth="800.0">
+    <children>
+        <Circle fill="#eef0f2" layoutX="73.0" layoutY="75.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+            <effect>
+                <DropShadow />
+            </effect>
+        </Circle>
+        <ImageView fitHeight="47.0" fitWidth="79.0" layoutX="38.0" layoutY="48.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <Image url="@images/hotel.jpg"/>
+        </ImageView>
+        <Label layoutX="31.0" layoutY="113.0" text="George Stones" textFill="#d7cccc">
+            <font>
+                <Font name="Calibri" size="14.0"/>
+            </font>
+        </Label>
+
+        <!-- Navigation Buttons -->
+        <VBox layoutX="5.0" layoutY="176.0" spacing="16.0" style="-fx-padding: 8;">
+            <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.3em"/>
+                    <Label text="Admines" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="HOTEL" size="1.3em"/>
+                    <Label text="Hotels" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="PLANE" size="1.3em"/>
+                    <Label text="Vols" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="ENVELOPE" size="1.3em"/>
+                    <Label text="Discussions" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="CAR" size="1.3em"/>
+                    <Label text="Voitures" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="COMMENTS" size="1.3em"/>
+                    <Label text="Forum" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+        </VBox>
+
+        <!-- Filter Section -->
+        <VBox layoutX="150.0" layoutY="10.0" spacing="20" style="-fx-padding: 10;">
+            <Label text="Filter Hotels" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+            <!-- Location Filter -->
+            <HBox spacing="10">
+                <Label text="Location:"/>
+                <ComboBox fx:id="locationComboBox" prefWidth="200"/>
+            </HBox>
+
+            <!-- Price Filter -->
+            <HBox spacing="10">
+                <Label text="Price Range:"/>
+                <Slider fx:id="priceSlider" min="0" max="500" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="50" blockIncrement="10"/>
+                <Label fx:id="priceLabel" text="Max Price: 100 TND"/>
+            </HBox>
+
+
+            <!-- Reservations Button -->
+        </VBox>
+        <Button fx:id="reservationsButton"
+                text="Mes Réservations"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
+                onAction="#handleReservationsButtonAction"
+                AnchorPane.topAnchor="30"
+                AnchorPane.rightAnchor="20"/>
+
+
+
+        <!-- Hotel List Section -->
+        <VBox layoutX="150.0" layoutY="170.0" spacing="20" style="-fx-padding: 10;">
+            <ListView fx:id="hotelListView" prefHeight="610" prefWidth="730">
+                <placeholder>
+                    <HBox fx:id="placeholderBox" alignment="CENTER">
+                        <Label text="No hotels available"/>
+                    </HBox>
+                </placeholder>
+            </ListView>
+        </VBox>
+    </children>
+</AnchorPane>

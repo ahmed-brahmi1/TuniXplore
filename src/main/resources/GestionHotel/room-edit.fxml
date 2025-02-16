@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controllers.Hotel.Room.EditRoomController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <VBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+        <Label text="Edit Room Details" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+
+        <Label text="Room Number:"/>
+        <Label fx:id="roomNumberLabel" style="-fx-font-weight: bold;"/>
+
+        <Label text="Location:"/>
+        <Label fx:id="locationLabel" style="-fx-font-weight: bold;"/>
+
+        <Label text="Price:"/>
+        <TextField fx:id="priceTextField" style="-fx-font-weight: bold;"/>
+
+        <Label text="Room Type:"/>
+        <ComboBox fx:id="roomTypeComboBox" editable="true"/>
+
+        <Label text="Availability:"/>
+        <ComboBox fx:id="availabilityComboBox">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Available"/>
+                    <String fx:value="Not Available"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label text="Amenities:"/>
+        <HBox spacing="10">
+            <CheckBox fx:id="wifiCheckBox" text="Wi-Fi"/>
+            <CheckBox fx:id="acCheckBox" text="Air Conditioning"/>
+            <CheckBox fx:id="tvCheckBox" text="TV"/>
+            <CheckBox fx:id="breakfastCheckBox" text="Breakfast"/>
+        </HBox>
+
+        <Button text="Save" onAction="#handleSave"/>
+        <Button text="Cancel" onAction="#handleCancel"/>
+    </VBox>
+</AnchorPane>

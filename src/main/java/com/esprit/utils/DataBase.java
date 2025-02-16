@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DataBase {
     private Connection connection;
     private static DataBase instance;
-    private final String URL = "jdbc:mysql://localhost:3306/PIDEV";
+    private final String URL = "jdbc:mysql://localhost:3306/tunixplore";
     private final String USER = "root";
     private final String PASSWORD = "";
 

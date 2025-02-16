@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.effect.DropShadow?>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.esprit.controllers.Hotel.HotelClient.HotelDetailsClientController"
+            prefHeight="800.0" prefWidth="800.0">
+    <AnchorPane prefHeight="800.0" prefWidth="800.0">
+        <children>
+
+           <Circle fill="#eef0f2" layoutX="73.0" layoutY="75.0" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+                <effect>
+                    <DropShadow />
+                </effect>
+            </Circle>
+            <ImageView fitHeight="47.0" fitWidth="79.0" layoutX="38.0" layoutY="48.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@images/hotel.jpg"/>
+            </ImageView>
+            <Label layoutX="31.0" layoutY="113.0" text="George Stones" textFill="#d7cccc">
+                <font>
+                    <Font name="Calibri" size="14.0"/>
+                </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="176.0" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.3em">
+                        <HBox.margin>
+                            <Insets left="8.0" right="8.0"/>
+                        </HBox.margin>
+                    </FontAwesomeIcon>
+                    <Label text="Admines" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="234.0" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="HOTEL" size="1.3em">
+                        <HBox.margin>
+                            <Insets left="8.0" right="8.0"/>
+                        </HBox.margin>
+                    </FontAwesomeIcon>
+                    <Label text="Hotels" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="292.0" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="PLANE" size="1.3em">
+                        <HBox.margin>
+                            <Insets left="8.0" right="8.0"/>
+                        </HBox.margin>
+                    </FontAwesomeIcon>
+                    <Label text="Vols" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="408.0" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="ENVELOPE" size="1.3em">
+                        <HBox.margin>
+                            <Insets left="8.0" right="8.0"/>
+                        </HBox.margin>
+                    </FontAwesomeIcon>
+                    <Label text="Discussions" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="350.0" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="CAR" size="1.3em">
+                        <HBox.margin>
+                            <Insets left="8.0" right="8.0"/>
+                        </HBox.margin>
+                    </FontAwesomeIcon>
+                    <Label text="Voitures" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                        <HBox.margin>
+                            <Insets />
+                        </HBox.margin>
+                    </Label>
+                </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="467.0" prefHeight="18.0" prefWidth="137.0">
+                <children>
+                    <FontAwesomeIcon fill="WHITE" glyphName="COMMENTS" size="1.3em">
+                        <HBox.margin>
+                            <Insets right="5.0"/>
+                        </HBox.margin>
+                    </FontAwesomeIcon>
+                    <Label text="Forum" textFill="WHITE">
+                        <font>
+                            <Font name="Calibri" size="14.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </HBox>
+            <VBox layoutX="150.0" layoutY="10.0" spacing="10" style="-fx-padding: 10;" prefWidth="600">
+                <!-- Carousel Section -->
+                <!-- Back Button -->
+                <Button fx:id="backButton" layoutX="10.0" layoutY="10.0" text="Back" onAction="#handleBackButtonAction" style="-fx-font-size: 14; -fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+
+                <VBox alignment="CENTER" prefWidth="1000" spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 20; -fx-background-radius: 10;">
+                    <StackPane>
+                        <ImageView fx:id="mainImageView" fitHeight="332.0" fitWidth="800" preserveRatio="true"/>
+                    </StackPane>
+
+                    <HBox alignment="CENTER" spacing="10" style="-fx-padding: 10;">
+                        <Button fx:id="prevButton" style="-fx-font-size: 18; -fx-min-width: 40; -fx-min-height: 40; -fx-background-radius: 20;" text="❮"/>
+                        <ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="90.0" style="-fx-background-color: transparent;">
+                            <content>
+                                <HBox fx:id="thumbnailBox" alignment="CENTER" spacing="10"/>
+                            </content>
+                        </ScrollPane>
+                        <Button fx:id="nextButton" style="-fx-font-size: 18; -fx-min-width: 40; -fx-min-height: 40; -fx-background-radius: 20;" text="❯"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Hotel Details Section -->
+                <VBox layoutY="210" spacing="10" style="-fx-padding: 10;">
+                    <Label fx:id="hotelNameLabel" style="-fx-font-size: 24; -fx-font-weight: bold;"/>
+                    <Label fx:id="hotelLocationLabel" style="-fx-font-size: 16;"/>
+                    <Label fx:id="hotelRatingLabel" style="-fx-font-size: 16;"/>
+
+                    <!-- Features Section -->
+                    <VBox fx:id="featuresBox" spacing="5" style="-fx-text-fill: green;">
+                        <!-- Features will be added dynamically -->
+                    </VBox>
+
+                    <!-- Rooms Section -->
+                    <Label text="Available Rooms" style="-fx-font-size: 20; -fx-font-weight: bold;"/>
+                    <ListView fx:id="roomsListView" prefHeight="200">
+                        <placeholder>
+                            <Label text="No rooms available."/>
+                        </placeholder>
+                    </ListView>
+                </VBox>
+            </VBox>
+        </children>
+    </AnchorPane>
+</ScrollPane>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.esprit.controllers.Hotel.HotelAdmin.HotelListController">
+
+    <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+        <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 20; -fx-pref-width: 100%;">
+            <Label text="🏨 Hotel List" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Pane HBox.hgrow="ALWAYS"/>
+            <Button text="➕ Add Hotel" fx:id="addHotelButton" onAction="#navigateToAddHotel"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;
+                           -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 20;"
+                   />
+        </HBox>
+
+
+        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10;">
+            <Label text="🔍 Search: " />
+            <TextField fx:id="searchField" promptText="Enter hotel name..." onKeyReleased="#filterHotels"/>
+
+            <Label text="💰 Price Range: " />
+            <Slider fx:id="priceSlider" min="0" max="500" value="500" blockIncrement="10"
+                    onMouseReleased="#filterHotelsByPrice" />
+            <Label fx:id="priceLabel" text="500 TND" />
+        </HBox>
+
+
+
+
+        <ScrollPane fitToWidth="true">
+            <GridPane fx:id="hotelGrid" hgap="20" vgap="20" alignment="CENTER">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33"/>
+                    <ColumnConstraints percentWidth="33"/>
+                    <ColumnConstraints percentWidth="33"/>
+                </columnConstraints>
+            </GridPane>
+        </ScrollPane>
+    </VBox>
+</AnchorPane>

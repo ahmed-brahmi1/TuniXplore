@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="800" prefWidth="1000" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Hotel.Room.RoomAddController">
+
+    <StackPane prefHeight="809.0" prefWidth="988.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0">
+        <VBox alignment="CENTER" maxHeight="750" maxWidth="800" spacing="20" style="-fx-padding: 40px; -fx-background-color: #ffffff; -fx-background-radius: 15px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);">
+
+            <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Add New Room" />
+
+            <!-- Basic Information Section -->
+            <VBox maxWidth="700" spacing="15" style="-fx-padding: 20;">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;" text="Room Information" />
+
+                <GridPane hgap="15" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="100" prefWidth="150" />
+                        <ColumnConstraints prefWidth="450" />
+                    </columnConstraints>
+
+
+                    <!-- Modified Location Section -->
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints minWidth="100" prefWidth="150" />
+                            <ColumnConstraints prefWidth="450" />
+                        </columnConstraints>
+
+                        <!-- Location Type Dropdown -->
+                        <Label text="Location Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <ComboBox fx:id="locationTypeComboBox" prefHeight="43.0" prefWidth="76.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #3498db; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Floor" />
+                                    <String fx:value="Building" />
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+
+                        <!-- Location Value Input -->
+                        <Label text="Location Value:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="locationValueTextField" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #3498db; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <!-- Modified Image Section -->
+                        <Label text="Room Image:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <Button fx:id="browseButton" ellipsisString="Browse" onAction="#handleImageBrowse" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 15;" text="Browse" />
+                            <Label fx:id="imagePathLabel" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
+                        </HBox>
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
+
+                    </GridPane>
+                    <Label style="-fx-font-size: 14px;" text="Base Price:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="basePriceTextField" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #3498db; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <Label style="-fx-font-size: 14px;" text="Room Type:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <ComboBox fx:id="roomTypeComboBox" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #3498db; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+
+                    <Label style="-fx-font-size: 14px;" text="Room Number:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <TextField fx:id="roomNumberTextField" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #3498db; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+
+
+                    <Label style="-fx-font-size: 14px;" text="Available:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                    <CheckBox fx:id="availableCheckBox" style="-fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+            </VBox>
+
+            <!-- Room Amenities Section -->
+            <VBox maxWidth="700" spacing="15" style="-fx-padding: 20; -fx-background-color: #f8f9fa; -fx-background-radius: 10;">
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #34495e;" text="Room Amenities" />
+
+                <FlowPane fx:id="amenitiesPane" hgap="10" vgap="10">
+                    <CheckBox fx:id="wifiCheckBox" style="-fx-font-size: 14px;" text="Wi-Fi" />
+                    <CheckBox fx:id="acCheckBox" style="-fx-font-size: 14px;" text="Air Conditioning" />
+                    <CheckBox fx:id="tvCheckBox" style="-fx-font-size: 14px;" text="TV" />
+                    <CheckBox fx:id="breakfastCheckBox" style="-fx-font-size: 14px;" text="Breakfast" />
+                </FlowPane>
+            </VBox>
+
+            <!-- Action Buttons -->
+            <HBox alignment="CENTER" spacing="20" style="-fx-padding: 10;">
+                <Button fx:id="addRoomButton" onAction="#addRoom" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12 20; -fx-background-radius: 25;" text="Save Room" />
+                <Button fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12 20; -fx-background-radius: 25;" text="Cancel" />
+            </HBox>
+        </VBox>
+    </StackPane>
+</AnchorPane>

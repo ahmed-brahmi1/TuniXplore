@@ -1,0 +1,94 @@
+/* 🌆 Fond d'écran */
+#root {
+    -fx-background-image: url("../images/background.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+/* 📦 Carte blanche centrale */
+#card {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-padding: 20px;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0, 0, 5);
+}
+
+/* 🏷️ Titre */
+#title-label {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* 🏷️ Labels */
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #444;
+}
+
+/* 📋 Champs de texte */
+.form-input {
+    -fx-pref-width: 200px;
+    -fx-padding: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* ✅ Boutons stylisés */
+.btn-green {
+    -fx-background-color: #28a745;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px 12px;
+}
+
+.btn-green:hover {
+    -fx-background-color: #218838;
+}
+
+.btn-red {
+    -fx-background-color: #dc3545;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px 12px;
+}
+
+.btn-red:hover {
+    -fx-background-color: #c82333;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.list-view {
+    -fx-background-color: #f9f9f9;
+    -fx-font-size: 14px;
+}
+
+.list-view .list-cell {
+    -fx-padding: 10;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 0 0 1 0;
+}
+
+.list-view .list-cell:hover {
+    -fx-background-color: #e0f7fa;
+}
+
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
