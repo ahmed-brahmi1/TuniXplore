@@ -240,6 +240,7 @@ public class ProfileController {
 
         Optional<ButtonType> result = confirmAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
+            
             // Supprimer l'utilisateur
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
