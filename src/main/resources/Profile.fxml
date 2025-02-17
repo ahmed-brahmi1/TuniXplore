@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #9cdbff;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.User.ProfileController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <children>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="239.0" spacing="10.0" style="-fx-background-color: #1e90ff;">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/picture.png" />
+               </image></ImageView>
+            <Label text="Nom et Prenom" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="editProfileButton" mnemonicParsing="false" onAction="#handleEditProfile" styleClass="Editer" text="Editer le profile" textFill="WHITE">
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Label layoutX="316.0" layoutY="49.0" text="Paramètres du profile" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <VBox layoutX="247.0" layoutY="138.0" prefHeight="200.0" prefWidth="503.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="503.0">
+               <children>
+                  <Label text="Nom" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="200.0" prefWidth="140.0" />
+                  <TextField fx:id="name" prefHeight="25.0" prefWidth="194.0" styleClass="text_Profile" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="503.0">
+               <children>
+                  <Label text="Prénom" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="60.0" prefWidth="127.0" />
+                  <TextField fx:id="lastName" prefHeight="25.0" prefWidth="194.0" styleClass="text_Profile" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="503.0">
+               <children>
+                  <Label text="Age" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="50.0" prefWidth="157.0" />
+                  <TextField fx:id="Age" prefHeight="25.0" prefWidth="194.0" styleClass="text_Profile" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="503.0">
+               <children>
+                  <Label text="Nombre de points" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="50.0" prefWidth="55.0" />
+                  <TextField fx:id="nbrPoints" editable="false" prefHeight="25.0" prefWidth="194.0" styleClass="text_Profile" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="247.0" layoutY="100.0" text="Paramètres du profile" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <VBox layoutX="257.0" layoutY="386.0" prefHeight="200.0" prefWidth="503.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="503.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="213.0" text="Nonumero de telephone" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="60.0" prefWidth="0.0" />
+                  <TextField fx:id="tel" prefHeight="25.0" prefWidth="194.0" styleClass="text_Profile" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="503.0">
+               <children>
+                  <Label prefHeight="26.0" prefWidth="119.0" text="email" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="60.0" prefWidth="92.0" />
+                  <TextField fx:id="email" prefHeight="25.0" prefWidth="194.0" styleClass="text_Profile" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="257.0" layoutY="344.0" text="Coordonnées" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

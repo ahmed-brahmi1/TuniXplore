@@ -109,6 +109,12 @@ public class User {
         this.tel = tel;
     }
 
+    public User(int id,String nom,String prenom){
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+    }
+
     @Override
     public String toString() {
         return "User{" +

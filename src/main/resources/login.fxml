@@ -17,6 +17,10 @@
       <URL value="@style.css" />
    </stylesheets>
    <children>
+      <!-- Autres éléments de l'interface utilisateur -->
+      <Label fx:id="errorLabel" layoutX="458.0" layoutY="500.0" textFill="RED" />
+   </children>
+   <children>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #1e90ff;">
          <children>
             <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -62,7 +66,7 @@
       </Label>
       <TextField fx:id="login_email" layoutX="458.0" layoutY="256.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" promptText="Email" />
       <PasswordField fx:id="login_password" layoutX="458.0" layoutY="327.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="250.0" promptText="Mot de passe" />
-      <Label layoutX="565.0" layoutY="374.0" styleClass="forgot-password-label" text="Mot de passe oublié ?" textFill="#a3a3a3">
+      <Label fx:id="Reset" layoutX="565.0" layoutY="374.0" styleClass="forgot-password-label" text="Mot de passe oublié ?" textFill="#a3a3a3">
          <font>
             <Font name="Ebrima Bold" size="14.0" />
          </font>

@@ -1,7 +1,10 @@
 package com.esprit.controllers.User;
 
+import com.esprit.models.Parrainage;
 import com.esprit.models.User;
+import com.esprit.services.User.ServiceParrainage;
 import com.esprit.services.User.ServiceUser;
+import com.esprit.utils.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -41,20 +44,14 @@ public class ajoutUserController {
     private TextField prenom;
 
     @FXML
-    private Button btn_inscrire; // Bouton pour s'inscrire
+    private Button btn;
 
     @FXML
     private void goBack() {
         try {
-            // Charger le fichier FXML de l'interface login
             Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
-            Scene scene = new Scene(root);
-
-            // Obtenir la scène actuelle à partir du bouton "Go Back"
             Stage stage = (Stage) goBack.getScene().getWindow();
-
-            // Changer la scène
-            stage.setScene(scene);
+            stage.setScene(new Scene(root));
             stage.show();
         } catch (Exception e) {
             e.printStackTrace();
@@ -64,34 +61,72 @@ public class ajoutUserController {
     @FXML
     private void handleInscription() {
         try {
-            // Récupérer les données saisies par l'utilisateur
-            String nomUser = nom.getText();
-            String prenomUser = prenom.getText();
-            int ageUser = Integer.parseInt(age.getText());
-            String genreUser = g.getText();
-            int telUser = Integer.parseInt(num_tel.getText());
-            String emailUser = email.getText();
-            String mdpUser = mdp.getText();
+            // Récupérer les données saisies
+            String nomUser = nom.getText().trim();
+            String prenomUser = prenom.getText().trim();
+            int ageUser = Integer.parseInt(age.getText().trim());
+            String genreUser = g.getText().trim();
+            int telUser = Integer.parseInt(num_tel.getText().trim());
+            String emailUser = email.getText().trim();
+            String mdpUser = mdp.getText().trim();
+            String codeParrainage = code.getText().trim(); // Récupérer le code de parrainage
 
-            // Créer un nouvel utilisateur
-            User newUser = new User(nomUser, prenomUser, ageUser, genreUser, emailUser, mdpUser, "voyageur", telUser);
+            // Vérification des champs (optionnel)
+            if (nomUser.isEmpty() || prenomUser.isEmpty() || emailUser.isEmpty() || mdpUser.isEmpty() || codeParrainage.isEmpty()) {
+                showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez remplir tous les champs.");
+                return;
+            }
 
-            // Ajouter l'utilisateur à la base de données
+            // Créer l'utilisateur
+            User newUser = new User(nomUser, prenomUser, ageUser, genreUser, emailUser, mdpUser, "Voyageur", telUser);
+
+            // Ajouter l'utilisateur dans la base
             ServiceUser serviceUser = new ServiceUser();
             serviceUser.ajouter(newUser);
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Succès");
-            alert.setHeaderText(null); // Pas de texte d'en-tête
-            alert.setContentText("L'utilisateur a été ajouté avec succès !");
-            alert.showAndWait();
 
-            System.out.println("Utilisateur ajouté avec succès !");
+            // ✅ Stocker l'utilisateur dans la session
+            Session.setCurrentUser(newUser);
 
+
+
+            // Ajouter un parrainage avec l'ID de l'utilisateur et le code saisi
+            ServiceParrainage serviceParrainage = new ServiceParrainage();
+            Parrainage parrainage = new Parrainage(newUser.getId(), codeParrainage); // Utilisation du code saisi
+            serviceParrainage.ajouter(parrainage);
+
+            // ✅ Rediriger vers la page de profil
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
+                Parent root = loader.load();
+
+                // ✅ Passer l'utilisateur au contrôleur du profil
+                ProfileController profileController = loader.getController();
+                profileController.initUser(newUser);
+
+                Stage stage = (Stage) btn.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.show();
+            } catch (Exception e) {
+                showAlert(Alert.AlertType.ERROR, "Erreur", "Erreur lors de la redirection vers le profil.");
+                e.printStackTrace();
+            }
 
         } catch (NumberFormatException e) {
-            System.out.println("Erreur de format : Veuillez vérifier les champs numériques (âge, téléphone).");
+            showAlert(Alert.AlertType.WARNING, "Erreur de format", "Vérifiez les champs numériques (âge, téléphone).");
         } catch (Exception e) {
-            System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Erreur lors de l'inscription.");
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * Affiche une boîte de dialogue d'alerte.
+     */
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

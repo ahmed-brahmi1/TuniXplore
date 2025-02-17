@@ -30,3 +30,24 @@
     -fx-text-fill:  #1e90ff; /* Couleur du texte au survol */
     -fx-underline: true;
 }
+/* Styles de base du bouton */
+.GestionUser {
+   -fx-background-color: #696969;
+}
+
+/* Effet au survol */
+.GestionUser:hover {
+    -fx-background-color: #8c8c8c;
+}
+
+.Editer{
+    -fx-background-color: #74b0ef;
+    -fx-border-radius: 30;
+}
+.text_Profile{
+    -fx-background-color: rgba(0,0,0,0);
+    -fx-border-width:0 0 1 0 ;
+    -fx-border-color:  #1e90ff;
+}
+
+

@@ -15,15 +15,33 @@ public class ServiceUser implements CrudService<User>{
     }
     @Override
     public void ajouter(User user) {
-        String req="INSERT INTO `user`( `nom`, `prenom`, `age`, `genre`, `num_tel`, `email`, `mdp`, `role`) VALUES ('"+user.getNom()+"','"+user.getPrenom()+"',"+user.getAge()+",'"+user.getGenre()+"',"+user.getTel()+",'"+user.getEmail()+"','"+user.getMdp()+"','voyageur')";
+        String req = "INSERT INTO `user`(`nom`, `prenom`, `age`, `genre`, `num_tel`, `email`, `mdp`, `role`) " +
+                "VALUES ('" + user.getNom() + "','" + user.getPrenom() + "'," + user.getAge() + ",'" +
+                user.getGenre() + "'," + user.getTel() + ",'" + user.getEmail() + "','" +
+                user.getMdp() + "','voyageur')";
+
         try {
-            Statement statment=connection.createStatement();
-            statment.executeUpdate(req);
+            // ✅ Crée un Statement classique
+            Statement statement = connection.createStatement();
+
+            // ✅ Exécute la requête avec RETURN_GENERATED_KEYS
+            statement.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
             System.out.println("ajout de l'utilisateur avec succes!");
+
+            // ✅ Récupère l'ID généré automatiquement
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                user.setId(generatedKeys.getInt(1));  // ⚠️ Met à jour l'ID de l'utilisateur
+                System.out.println("ID utilisateur généré : " + user.getId());
+            } else {
+                System.out.println("Échec de récupération de l'ID généré.");
+            }
+
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Erreur lors de l'ajout de l'utilisateur : " + e.getMessage());
         }
     }
+
 
 
     @Override
@@ -78,5 +96,85 @@ public class ServiceUser implements CrudService<User>{
         } catch (SQLException e) {
             System.out.println(e.getMessage());        }
         return users;
+    }
+
+    public void ajouterParAdmin(User user) {
+        String req = "INSERT INTO `user`(`nom`, `prenom`, `age`, `genre`, `num_tel`, `email`, `mdp`, `role`) " +
+                "VALUES ('" + user.getNom() + "','" + user.getPrenom() + "'," + user.getAge() + ",'" +
+                user.getGenre() + "'," + user.getTel() + ",'" + user.getEmail() + "','" +
+                user.getMdp() + "','" + user.getRole() + "')";
+
+        try {
+            // ✅ Création du Statement avec récupération des clés
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(req, Statement.RETURN_GENERATED_KEYS);
+
+            // ✅ Récupération de l'ID généré automatiquement
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int userId = generatedKeys.getInt(1);
+                user.setId(userId);
+                System.out.println("ID de l'utilisateur ajouté : " + userId);
+
+
+            }
+            statement.close();
+
+            System.out.println("Ajout de l'utilisateur avec succès !");
+        } catch (SQLException e) {
+            System.out.println("Erreur : " + e.getMessage());
+        }
+    }
+
+
+
+
+    public User authenticate(String email, String password) {
+        String req = "SELECT * FROM `user` WHERE `email` = ? AND `mdp` = ?";
+        try {
+            PreparedStatement prep = connection.prepareStatement(req);
+            prep.setString(1, email);
+            prep.setString(2, password);
+            ResultSet rs = prep.executeQuery();
+
+            if (rs.next()) {
+                // Utilisateur trouvé, retourner l'objet User
+                return new User(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getInt("age"),
+                        rs.getString("genre"),
+                        rs.getString("email"),
+                        rs.getString("mdp"),
+                        rs.getString("role"),
+                        rs.getInt("num_tel")
+                );
+            } else {
+                // Aucun utilisateur trouvé
+                return null;
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de l'authentification : " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<>();
+        String query = "SELECT id, nom, prenom FROM user";
+        try (Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nom = resultSet.getString("nom");
+                String prenom = resultSet.getString("prenom");
+                userList.add(new User(id, nom, prenom));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userList;
     }
 }
