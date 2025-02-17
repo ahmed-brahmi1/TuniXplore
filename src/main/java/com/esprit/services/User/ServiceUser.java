@@ -46,11 +46,9 @@ public class ServiceUser implements CrudService<User>{
 
     @Override
     public void modifier(User user) {
-        String req="UPDATE `user` SET `nom`=?,`prenom`=?,`age`=?,`genre`=?,`num_tel`=?,`email`=?,`mdp`=?,`role`=? WHERE id=?";
+        String req = "UPDATE `user` SET `nom`=?, `prenom`=?, `age`=?, `genre`=?, `num_tel`=?, `email`=?, `mdp`=?, `role`=?, `photo`=? WHERE id=?";
         try {
-            PreparedStatement prep=connection.prepareStatement(req);
-            prep.setInt(9, user.getId());
-
+            PreparedStatement prep = connection.prepareStatement(req);
             prep.setString(1, user.getNom());
             prep.setString(2, user.getPrenom());
             prep.setInt(3, user.getAge());
@@ -59,12 +57,15 @@ public class ServiceUser implements CrudService<User>{
             prep.setString(6, user.getEmail());
             prep.setString(7, user.getMdp());
             prep.setString(8, user.getRole());
+            prep.setString(9, user.getProfilePhotoPath()); // Ajout du chemin de la photo de profil
+            prep.setInt(10, user.getId()); // Déplacement de l'ID à la fin
+
             prep.executeUpdate();
 
-            System.out.println("modification de l'utilisateur avec succes!");
-
+            System.out.println("Modification de l'utilisateur avec succès !");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());        }
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
@@ -148,7 +149,8 @@ public class ServiceUser implements CrudService<User>{
                         rs.getString("email"),
                         rs.getString("mdp"),
                         rs.getString("role"),
-                        rs.getInt("num_tel")
+                        rs.getInt("num_tel"),
+                        rs.getString("photo")
                 );
             } else {
                 // Aucun utilisateur trouvé

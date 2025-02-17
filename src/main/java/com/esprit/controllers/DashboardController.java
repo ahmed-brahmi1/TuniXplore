@@ -185,9 +185,9 @@ public class DashboardController {
     @FXML
     public void log_out(){
         Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmAlert.setTitle("Confirmer la suppression");
+        confirmAlert.setTitle("Confirmer la deconnexion");
         confirmAlert.setHeaderText(null);
-        confirmAlert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur ?");
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir de se deconnecter ?");
 
         Optional<ButtonType> result = confirmAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {

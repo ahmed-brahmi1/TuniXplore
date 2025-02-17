@@ -10,6 +10,21 @@ public class User {
     private String mdp;
     private String role;
     private String genre;
+    private String profilePhotoPath;
+
+    public User(int id, String nom, String prenom, int age, String genre, String email, String mdp, String role, int numTel, String profilePhotoPath) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.age = age;
+        this.genre = genre;
+        this.email = email;
+        this.mdp = mdp;
+        this.role = role;
+        this.profilePhotoPath = profilePhotoPath;
+        this.tel = numTel;
+
+    }
 
 
     public String getGenre() {
@@ -84,6 +99,14 @@ public class User {
         this.tel = tel;
     }
 
+    public String getProfilePhotoPath() {
+        return profilePhotoPath;
+    }
+
+    // Ajouter le setter pour profilePhotoPath
+    public void setProfilePhotoPath(String profilePhotoPath) {
+        this.profilePhotoPath = profilePhotoPath;
+    }
     public User() {
     }
 

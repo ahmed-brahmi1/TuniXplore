@@ -4,8 +4,21 @@ import com.esprit.models.User;
 import com.esprit.services.User.ServiceUser;
 import com.esprit.utils.Session;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Optional;
 
 public class ProfileController {
 
@@ -23,6 +36,16 @@ public class ProfileController {
 
     @FXML
     private TextField email;
+    @FXML
+    private Button uploadButton;
+    @FXML
+    private Button log_out;
+
+    @FXML
+    private ImageView image;
+
+    private String profilePhotoPath;
+
 
     private User currentUser; // Déclaration de currentUser au niveau de la classe
 
@@ -36,6 +59,25 @@ public class ProfileController {
             Age.setText(String.valueOf(currentUser.getAge()));
             tel.setText(String.valueOf(currentUser.getTel()));
             email.setText(currentUser.getEmail());
+
+            // Vérifier si le chemin de la photo de profil est présent
+            if (currentUser.getProfilePhotoPath() != null && !currentUser.getProfilePhotoPath().isEmpty()) {
+                System.out.println("Chemin de la photo de profil trouvé : " + currentUser.getProfilePhotoPath());
+                try {
+                    File file = new File(currentUser.getProfilePhotoPath());
+                    if (file.exists()) {
+                        Image profileImage = new Image(file.toURI().toString());
+                        image.setImage(profileImage);
+                    } else {
+                        System.out.println("Le fichier de la photo de profil n'existe pas : " + currentUser.getProfilePhotoPath());
+                    }
+                } catch (Exception e) {
+                    System.out.println("Erreur lors du chargement de la photo de profil : " + e.getMessage());
+                }
+            } else {
+                System.out.println("Aucun chemin de photo de profil trouvé pour l'utilisateur.");
+            }
+
         } else {
             // Si l'utilisateur n'est pas connecté, afficher un message d'erreur ou rediriger
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -54,7 +96,28 @@ public class ProfileController {
         Age.setText(String.valueOf(user.getAge()));
         tel.setText(String.valueOf(user.getTel()));
         email.setText(user.getEmail());
+
     }
+    @FXML
+    private void handleUploadPhoto() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir une photo de profil");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg")
+        );
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            profilePhotoPath = selectedFile.getAbsolutePath();
+            Image profileImage = new Image(selectedFile.toURI().toString());
+            image.setImage(profileImage);
+
+            // Mettre à jour l'utilisateur avec le nouveau chemin de la photo
+            if (currentUser != null) {
+                currentUser.setProfilePhotoPath(profilePhotoPath);
+            }
+        }
+    }
+
 
     public void saveChanges() {
         if (currentUser == null) {
@@ -127,6 +190,12 @@ public class ProfileController {
         currentUser.setTel(telUser);
         currentUser.setEmail(emailUser);
 
+
+        // Sauvegarder le chemin de la nouvelle photo de profil
+        if (profilePhotoPath != null) {
+            currentUser.setProfilePhotoPath(profilePhotoPath);
+        }
+
         // ✅ Mettre à jour la session
         Session.setCurrentUser(currentUser);
 
@@ -161,6 +230,32 @@ public class ProfileController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    public void log_out(){
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Confirmer la deconnexion");
+        confirmAlert.setHeaderText(null);
+        confirmAlert.setContentText("Êtes-vous sûr de vouloir de se deconnecter ?");
+
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // Supprimer l'utilisateur
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
+                Parent root = loader.load();
+
+                // Afficher la nouvelle interface
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("login");
+                stage.show();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            ((Stage) log_out.getScene().getWindow()).close();
+        }}
     private void showAlert(Alert.AlertType type, String title, String content) {
         Alert alert = new Alert(type);
         alert.setTitle(title);
