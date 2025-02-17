@@ -145,7 +145,7 @@ public class HotelListController {
 
     private void showHotelDetails(Hotel selectedHotel) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esprit/demo1/hotel-details.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionHotel/hotel-details.fxml"));
             Parent root = loader.load();
 
             HotelDetailsController controller = loader.getController();

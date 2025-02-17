@@ -92,3 +92,13 @@
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
+
+
+.GestionUser {
+    -fx-background-color: #696969;
+}
+
+/* Effet au survol */
+.GestionUser:hover {
+    -fx-background-color: #8c8c8c;
+}

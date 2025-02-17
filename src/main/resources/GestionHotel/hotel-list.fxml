@@ -1,45 +1,126 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.esprit.controllers.Hotel.HotelAdmin.HotelListController">
-
-    <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
-          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+<AnchorPane fx:id="rootPane" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Hotel.HotelAdmin.HotelListController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <VBox alignment="CENTER" spacing="20" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 20; -fx-pref-width: 100%;">
-            <Label text="🏨 Hotel List" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-            <Pane HBox.hgrow="ALWAYS"/>
-            <Button text="➕ Add Hotel" fx:id="addHotelButton" onAction="#navigateToAddHotel"
-                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;
-                           -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 20;"
-                   />
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="🏨 Hotel List">
+                <HBox.margin>
+                    <Insets left="200.0" />
+                </HBox.margin></Label>
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="addHotelButton" onAction="#navigateToAddHotel" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;                            -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 20;" text="➕ Add Hotel" />
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
         </HBox>
 
 
-        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10;">
-            <Label text="🔍 Search: " />
-            <TextField fx:id="searchField" promptText="Enter hotel name..." onKeyReleased="#filterHotels"/>
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;">
+            <Label text="🔍 Search: ">
+                <HBox.margin>
+                    <Insets />
+                </HBox.margin></Label>
+            <TextField fx:id="searchField" onKeyReleased="#filterHotels" promptText="Enter hotel name..." />
 
             <Label text="💰 Price Range: " />
-            <Slider fx:id="priceSlider" min="0" max="500" value="500" blockIncrement="10"
-                    onMouseReleased="#filterHotelsByPrice" />
+            <Slider fx:id="priceSlider" blockIncrement="10" max="500" min="0" onMouseReleased="#filterHotelsByPrice" value="500" />
             <Label fx:id="priceLabel" text="500 TND" />
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
         </HBox>
 
 
 
 
         <ScrollPane fitToWidth="true">
-            <GridPane fx:id="hotelGrid" hgap="20" vgap="20" alignment="CENTER">
+            <GridPane fx:id="hotelGrid" alignment="CENTER" hgap="20" vgap="20">
                 <columnConstraints>
-                    <ColumnConstraints percentWidth="33"/>
-                    <ColumnConstraints percentWidth="33"/>
-                    <ColumnConstraints percentWidth="33"/>
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
+                    <ColumnConstraints percentWidth="33" />
                 </columnConstraints>
             </GridPane>
+            <VBox.margin>
+                <Insets />
+            </VBox.margin>
         </ScrollPane>
+        <padding>
+            <Insets left="2.0" />
+        </padding>
+    </VBox>
+    <VBox prefHeight="800.0" prefWidth="220.0" style="-fx-background-color: #696969;">
+        <children>
+            <ImageView fitHeight="118.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/tuni.png" />
+                </image>
+            </ImageView>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="290.0" styleClass="GestionUser" text="Gestion des utilisateurs" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="30.0" />
+                </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="291.0" styleClass="GestionUser" text="Gestion des hôtels" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="292.0" styleClass="GestionUser" text="Gestion des voitures" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="297.0" styleClass="GestionUser" text="Gestion des vols" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="307.0" styleClass="GestionUser" text="Gestion des forums" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" />
+
+        </children>
     </VBox>
 </AnchorPane>
