@@ -57,38 +57,95 @@ public class ProfileController {
     }
 
     public void saveChanges() {
-        // Si currentUser n'est pas null, on met à jour ses données
-        if (currentUser != null) {
-            currentUser.setNom(name.getText());
-            currentUser.setPrenom(lastName.getText());
-            currentUser.setAge(Integer.parseInt(Age.getText()));
-            currentUser.setTel(Integer.parseInt(tel.getText()));
-            currentUser.setEmail(email.getText());
+        if (currentUser == null) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "L'utilisateur n'est pas connecté.");
+            return;
+        }
 
-            // Mettre à jour la session avec le nouvel utilisateur
-            Session.setCurrentUser(currentUser);
+        // Récupérer les données saisies
+        String nomUser = name.getText().trim();
+        String prenomUser = lastName.getText().trim();
+        String ageText = Age.getText().trim();
+        String telText = tel.getText().trim();
+        String emailUser = email.getText().trim();
 
-            // Enregistrer les modifications dans la base de données
-            ServiceUser serviceUser = new ServiceUser();
+        // Liste pour accumuler les erreurs
+        StringBuilder erreurs = new StringBuilder();
+
+        // ✅ Vérification des champs vides
+        if (nomUser.isEmpty() || prenomUser.isEmpty() || ageText.isEmpty() ||
+                telText.isEmpty() || emailUser.isEmpty()) {
+            erreurs.append("- Tous les champs doivent être remplis.\n");
+        }
+
+        // ✅ Vérification du nom et prénom (lettres uniquement)
+        if (!nomUser.matches("[a-zA-Z]+")) {
+            erreurs.append("- Le nom doit contenir uniquement des lettres.\n");
+        }
+        if (!prenomUser.matches("[a-zA-Z]+")) {
+            erreurs.append("- Le prénom doit contenir uniquement des lettres.\n");
+        }
+
+        // ✅ Vérification de l'email (forme correcte)
+        if (!emailUser.matches("^[\\w.-]+@[\\w.-]+\\.com$")) {
+            erreurs.append("- L'adresse email doit être valide (exemple : nom@domaine.com).\n");
+        }
+
+        // ✅ Vérification des champs numériques (âge, téléphone)
+        int ageUser = 0;
+        int telUser = 0;
+        try {
+            ageUser = Integer.parseInt(ageText);
+            if (ageUser <= 0) {
+                erreurs.append("- L'âge doit être un nombre positif.\n");
+            }
+        } catch (NumberFormatException e) {
+            erreurs.append("- L'âge doit être un nombre.\n");
+        }
+
+        // ✅ Vérification du téléphone (exactement 8 chiffres)
+        if (!telText.matches("\\d{8}")) {
+            erreurs.append("- Le numéro de téléphone doit contenir exactement 8 chiffres.\n");
+        } else {
+            try {
+                telUser = Integer.parseInt(telText);
+            } catch (NumberFormatException e) {
+                erreurs.append("- Le numéro de téléphone doit être un nombre valide.\n");
+            }
+        }
+
+        // ✅ Afficher toutes les erreurs ensemble
+        if (erreurs.length() > 0) {
+            showAlert(Alert.AlertType.WARNING, "Erreurs de saisie", erreurs.toString());
+            return; // Arrêter si erreurs
+        }
+
+        // ✅ Mise à jour de l'utilisateur
+        currentUser.setNom(nomUser);
+        currentUser.setPrenom(prenomUser);
+        currentUser.setAge(ageUser);
+        currentUser.setTel(telUser);
+        currentUser.setEmail(emailUser);
+
+        // ✅ Mettre à jour la session
+        Session.setCurrentUser(currentUser);
+
+        // ✅ Enregistrer les modifications dans la base
+        ServiceUser serviceUser = new ServiceUser();
+        try {
             System.out.println("Tentative de mise à jour pour l'utilisateur: " + currentUser.getNom());
             serviceUser.modifier(currentUser);
             System.out.println("Utilisateur mis à jour avec succès.");
 
-            // Affichage d'une notification de succès
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Succès");
-            alert.setHeaderText(null);
-            alert.setContentText("Données mises à jour avec succès !");
-            alert.showAndWait();
-        } else {
-            System.out.println("Erreur : l'utilisateur n'est pas connecté.");
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText(null);
-            alert.setContentText("Erreur : l'utilisateur n'est pas connecté.");
-            alert.showAndWait();
+            // ✅ Affichage d'une notification de succès
+            showAlert(Alert.AlertType.INFORMATION, "Succès", "Données mises à jour avec succès !");
+        } catch (Exception e) {
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Échec de la mise à jour des données.");
+            e.printStackTrace();
         }
     }
+
+
 
     @FXML
     private void handleEditProfile() {
@@ -103,5 +160,12 @@ public class ProfileController {
             alert.setContentText("Une erreur s'est produite lors de la mise à jour du profil.");
             alert.showAndWait();
         }
+    }
+    private void showAlert(Alert.AlertType type, String title, String content) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

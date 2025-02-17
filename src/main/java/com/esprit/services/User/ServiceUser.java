@@ -18,7 +18,7 @@ public class ServiceUser implements CrudService<User>{
         String req = "INSERT INTO `user`(`nom`, `prenom`, `age`, `genre`, `num_tel`, `email`, `mdp`, `role`) " +
                 "VALUES ('" + user.getNom() + "','" + user.getPrenom() + "'," + user.getAge() + ",'" +
                 user.getGenre() + "'," + user.getTel() + ",'" + user.getEmail() + "','" +
-                user.getMdp() + "','voyageur')";
+                user.getMdp() + "','Voyageur')";
 
         try {
             // ✅ Crée un Statement classique

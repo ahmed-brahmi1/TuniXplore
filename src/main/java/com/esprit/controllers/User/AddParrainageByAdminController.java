@@ -72,33 +72,49 @@ public class AddParrainageByAdminController {
 
     public void ajouterParrainage() {
         try {
-            // Obtenir l'objet User sélectionné
+            // ✅ 1. Vérifier si l'utilisateur est sélectionné
             User selectedUser = Voyageurs.getValue();
+            String parrainCode = Code.getText().trim(); // Supprimer les espaces
+
+            StringBuilder erreurs = new StringBuilder(); // Liste d'erreurs
+
+            // Vérification des champs
             if (selectedUser == null) {
-                System.out.println("Erreur : Aucun utilisateur sélectionné !");
-                return;
+                erreurs.append("- Aucun utilisateur sélectionné.\n");
             }
 
-            int userId = selectedUser.getId(); // Récupérer l’ID
-            String parrainCode = Code.getText();
+            if (parrainCode.isEmpty()) {
+                erreurs.append("- Le champ Code doit être rempli.\n");
+            }
 
-            // Créer l'objet Parrainage avec l'ID du parrain
+            // ✅ Si erreurs, afficher une alerte et arrêter l’exécution
+            if (erreurs.length() > 0) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Erreur de saisie");
+                alert.setHeaderText("Champs manquants");
+                alert.setContentText(erreurs.toString());
+                alert.showAndWait();
+                return; // ⛔ Arrêter ici si erreurs
+            }
+
+            // ✅ 2. Créer l'objet Parrainage et ajouter dans la base
+            int userId = selectedUser.getId();
             Parrainage parrainage = new Parrainage(userId, parrainCode);
             parrainageService.ajouter(parrainage);
 
-            // Afficher un message de succès
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Succès");
-            alert.setHeaderText(null);
-            alert.setContentText("Le parrainage a été ajouté avec succès !");
-            alert.showAndWait();
+            // ✅ 3. Afficher un message de succès
+            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+            successAlert.setTitle("Succès");
+            successAlert.setHeaderText(null);
+            successAlert.setContentText("Le parrainage a été ajouté avec succès !");
+            successAlert.showAndWait();
             System.out.println("Parrainage ajouté avec succès !");
         } catch (Exception e) {
             System.out.println("Erreur lors de l'ajout : " + e.getMessage());
             e.printStackTrace();
         }
 
-        // Afficher le Dashboard
+        // ✅ 4. Ouvrir le Dashboard
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardParrainage.fxml"));
             Parent root = loader.load();
@@ -110,9 +126,10 @@ public class AddParrainageByAdminController {
             e.printStackTrace();
         }
 
-        // Fermer la fenêtre actuelle
+        // ✅ 5. Fermer la fenêtre actuelle
         ((Stage) AddParrainagebtn.getScene().getWindow()).close();
     }
+
 
 
 
@@ -139,45 +156,67 @@ public class AddParrainageByAdminController {
     @FXML
     private void handleUpdateParrainage() {
         AddParrainagebtn.setVisible(false);
+
+        // ✅ Récupérer les données
+        String c = Code.getText().trim();
+        User selectedUser = Voyageurs.getValue();
+
+        // ✅ Liste pour les erreurs
+        StringBuilder erreurs = new StringBuilder();
+
+        // ✅ Vérifications
+        if (selectedUser == null) {
+            erreurs.append("- Veuillez sélectionner un utilisateur.\n");
+        }
+        if (c.isEmpty()) {
+            erreurs.append("- Le champ Code est obligatoire.\n");
+        }
+
+        // ✅ Si erreurs, afficher une alerte et arrêter l’exécution
+        if (erreurs.length() > 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Erreur de saisie");
+            alert.setHeaderText("Champs manquants");
+            alert.setContentText(erreurs.toString());
+            alert.showAndWait();
+            return; // ⛔ Stopper l’exécution
+        }
+
+        // ✅ Ajouter ou modifier selon le contexte
         if (ParraianageToEdit == null) {
-            // Ajouter un nouvel utilisateur
-            String c = Code.getText();
-
-            int v = Voyageurs.getValue().getId();
-
-            Parrainage p=new Parrainage(v, c);
+            // ➕ Ajouter un nouveau parrainage
+            Parrainage p = new Parrainage(selectedUser.getId(), c);
             parrainageService.ajouterParAdmin(p);
-
         } else {
-            // Modifier l'utilisateur existant
-            ParraianageToEdit.setCode(Code.getText());
-            ParraianageToEdit.setId_sender(Voyageurs.getValue().getId());
-
+            // ✏️ Modifier un parrainage existant
+            ParraianageToEdit.setCode(c);
+            ParraianageToEdit.setId_sender(selectedUser.getId());
             parrainageService.modifier(ParraianageToEdit);
         }
 
+        // ✅ Afficher un message de succès
+        Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
+        successAlert.setTitle("Succès");
+        successAlert.setHeaderText(null);
+        successAlert.setContentText("Parrainage traité avec succès !");
+        successAlert.showAndWait();
 
-
-
-
+        // ✅ Charger et afficher le DashboardParrainage
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardParrainage.fxml"));
             Parent root = loader.load();
-
-
-            // Afficher la nouvelle interface
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Dashboard");
+            stage.setTitle("Dashboard Parrainage");
             stage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // Fermer la fenêtre après l'ajout ou la modification
+        // ✅ Fermer la fenêtre actuelle
         ((Stage) AddParrainagebtn.getScene().getWindow()).close();
     }
+
 
 
     @FXML

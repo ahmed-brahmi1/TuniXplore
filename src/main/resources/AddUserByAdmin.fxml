@@ -85,7 +85,6 @@
                 </Text>
             </children>
         </VBox>
-      <TextField fx:id="genreField" layoutX="284.0" layoutY="279.0" prefHeight="43.0" prefWidth="165.0" promptText="Genre" />
       <TextField fx:id="telField" layoutX="484.0" layoutY="222.0" prefHeight="43.0" prefWidth="165.0" promptText="Numéro de téléphone" />
       <TextField fx:id="ageField" layoutX="284.0" layoutY="222.0" prefHeight="43.0" prefWidth="165.0" promptText="Age" />
       <TextField fx:id="prenomField" layoutX="484.0" layoutY="156.0" prefHeight="43.0" prefWidth="165.0" promptText="prénom" />
@@ -95,6 +94,7 @@
       <Button fx:id="AddUserbtn" layoutX="284.0" layoutY="486.0" mnemonicParsing="false" onAction="#ajouterUtilisateur" prefHeight="43.0" prefWidth="104.0" text="Ajouter" />
       <PasswordField fx:id="mdpField" layoutX="284.0" layoutY="409.0" prefHeight="43.0" prefWidth="365.0" promptText="Mot de passe" />
       <Button fx:id="UpdateUserbtn1" layoutX="415.0" layoutY="486.0" mnemonicParsing="false" onAction="#handleUpdateUser" prefHeight="43.0" prefWidth="104.0" text="Modifier" />
+      <ComboBox fx:id="g" layoutX="292.0" layoutY="288.0" prefWidth="150.0" promptText="Genre" />
     </children>
     <padding>
         <Insets left="10.0" />

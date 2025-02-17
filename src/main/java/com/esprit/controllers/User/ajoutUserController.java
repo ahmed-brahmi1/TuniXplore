@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,7 +27,7 @@ public class ajoutUserController {
     private TextField email;
 
     @FXML
-    private TextField g;
+    private ComboBox<String> g;
 
     @FXML
     private Button goBack;
@@ -47,6 +48,13 @@ public class ajoutUserController {
     private Button btn;
 
     @FXML
+    public void initialize() {
+        // Ajouter des rôles dans le ComboBox
+        g.getItems().addAll("Homme","Femme");
+
+    }
+
+    @FXML
     private void goBack() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
@@ -64,34 +72,98 @@ public class ajoutUserController {
             // Récupérer les données saisies
             String nomUser = nom.getText().trim();
             String prenomUser = prenom.getText().trim();
-            int ageUser = Integer.parseInt(age.getText().trim());
-            String genreUser = g.getText().trim();
-            int telUser = Integer.parseInt(num_tel.getText().trim());
+            String ageText = age.getText().trim();
+            String genreUser = g.getValue();
+            String telText = num_tel.getText().trim();
             String emailUser = email.getText().trim();
             String mdpUser = mdp.getText().trim();
-            String codeParrainage = code.getText().trim(); // Récupérer le code de parrainage
+            String codeParrainage = code.getText().trim();
 
-            // Vérification des champs (optionnel)
-            if (nomUser.isEmpty() || prenomUser.isEmpty() || emailUser.isEmpty() || mdpUser.isEmpty() || codeParrainage.isEmpty()) {
-                showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez remplir tous les champs.");
-                return;
+            // Liste pour accumuler les erreurs
+            StringBuilder erreurs = new StringBuilder();
+
+            // ✅ Vérification des champs vides
+            if (nomUser.isEmpty() || prenomUser.isEmpty() || ageText.isEmpty() ||
+                    genreUser==null || telText.isEmpty() || emailUser.isEmpty() ||
+                    mdpUser.isEmpty() || codeParrainage.isEmpty()) {
+                erreurs.append("- Tous les champs doivent être remplis.\n");
             }
 
-            // Créer l'utilisateur
+            // ✅ Vérification du nom et prénom (lettres uniquement)
+            if (!nomUser.matches("[a-zA-Z]+")) {
+                erreurs.append("- Le nom doit contenir uniquement des lettres.\n");
+            }
+            if (!prenomUser.matches("[a-zA-Z]+")) {
+                erreurs.append("- Le prénom doit contenir uniquement des lettres.\n");
+            }
+
+            // ✅ Vérification de l'email (forme correcte)
+            if (!emailUser.matches("^[\\w.-]+@[\\w.-]+\\.com$")) {
+                erreurs.append("- L'adresse email doit être valide (exemple : nom@domaine.com).\n");
+            }
+
+            // ✅ Vérification du mot de passe (au moins 8 caractères)
+            if (mdpUser.length() < 8) {
+                erreurs.append("- Le mot de passe doit contenir au moins 8 caractères.\n");
+            }
+
+            // ✅ Vérification des champs numériques (âge, téléphone)
+            int ageUser = 0;
+            int telUser = 0;
+            try {
+                ageUser = Integer.parseInt(ageText);
+                if (ageUser <= 0) {
+                    erreurs.append("- L'âge doit être un nombre positif.\n");
+                }
+            } catch (NumberFormatException e) {
+                erreurs.append("- L'âge doit être un nombre.\n");
+            }
+            try {
+                ageUser = Integer.parseInt(ageText);
+                if (ageUser > 90||ageUser<10) {
+                    erreurs.append("- L'âge doit être Valide.\n");
+                }
+            } catch (NumberFormatException e) {
+                erreurs.append("- L'âge doit être un nombre.\n");
+            }
+
+            try {
+                telUser = Integer.parseInt(telText);
+                if (telUser <= 0) {
+                    erreurs.append("- Le numéro de téléphone doit être un nombre positif.\n");
+                }
+            } catch (NumberFormatException e) {
+                erreurs.append("- Le numéro de téléphone doit être un nombre.\n");
+            }
+            // ✅ Vérification du téléphone (exactement 8 chiffres)
+            if (!telText.matches("\\d{8}")) {
+                erreurs.append("- Le numéro de téléphone doit contenir exactement 8 chiffres.\n");
+            } else {
+                try {
+                    telUser = Integer.parseInt(telText);
+                } catch (NumberFormatException e) {
+                    erreurs.append("- Le numéro de téléphone doit être un nombre valide.\n");
+                }}
+
+            // ✅ Afficher toutes les erreurs ensemble
+            if (erreurs.length() > 0) {
+                showAlert(Alert.AlertType.WARNING, "Erreurs de saisie", erreurs.toString());
+                return; // Arrêter si erreurs
+            }
+
+            // ✅ Créer l'utilisateur
             User newUser = new User(nomUser, prenomUser, ageUser, genreUser, emailUser, mdpUser, "Voyageur", telUser);
 
-            // Ajouter l'utilisateur dans la base
+            // ✅ Ajouter l'utilisateur dans la base
             ServiceUser serviceUser = new ServiceUser();
             serviceUser.ajouter(newUser);
 
             // ✅ Stocker l'utilisateur dans la session
             Session.setCurrentUser(newUser);
 
-
-
-            // Ajouter un parrainage avec l'ID de l'utilisateur et le code saisi
+            // ✅ Ajouter le parrainage
             ServiceParrainage serviceParrainage = new ServiceParrainage();
-            Parrainage parrainage = new Parrainage(newUser.getId(), codeParrainage); // Utilisation du code saisi
+            Parrainage parrainage = new Parrainage(newUser.getId(), codeParrainage);
             serviceParrainage.ajouter(parrainage);
 
             // ✅ Rediriger vers la page de profil
@@ -99,7 +171,6 @@ public class ajoutUserController {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Profile.fxml"));
                 Parent root = loader.load();
 
-                // ✅ Passer l'utilisateur au contrôleur du profil
                 ProfileController profileController = loader.getController();
                 profileController.initUser(newUser);
 
@@ -111,13 +182,12 @@ public class ajoutUserController {
                 e.printStackTrace();
             }
 
-        } catch (NumberFormatException e) {
-            showAlert(Alert.AlertType.WARNING, "Erreur de format", "Vérifiez les champs numériques (âge, téléphone).");
         } catch (Exception e) {
-            showAlert(Alert.AlertType.ERROR, "Erreur", "Erreur lors de l'inscription.");
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Erreur inattendue lors de l'inscription.");
             e.printStackTrace();
         }
     }
+
 
     /**
      * Affiche une boîte de dialogue d'alerte.
