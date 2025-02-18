@@ -2,6 +2,8 @@ package com.esprit.controllers.Voiture;
 
 import com.esprit.models.Voiture;
 import com.esprit.services.services_voiture.ServiceVoiture;
+import com.esprit.models.Promotions;
+import com.esprit.services.services_voiture.PromotionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -49,8 +51,10 @@ public class HomeListVoitureController {
 
 
 
+
     private final ServiceVoiture serviceVoiture = new ServiceVoiture();
     private ObservableList<Voiture> voituresList = FXCollections.observableArrayList();
+    private final PromotionService promotionService = new PromotionService();
 
 
 
@@ -114,7 +118,7 @@ public class HomeListVoitureController {
             VBox voitureCard = creerCarteVoiture(voiture);
             voituresGrid.add(voitureCard, col, row);
             col++;
-            if (col == 5) {
+            if (col == 3) {
                 col = 0;
                 row++;
             }
@@ -122,11 +126,14 @@ public class HomeListVoitureController {
     }
 
     private VBox creerCarteVoiture(Voiture voiture) {
-        VBox card = new VBox(5);
+        VBox card = new VBox(10);
         card.setAlignment(Pos.CENTER);
         card.setStyle("-fx-background-color: white; -fx-border-radius: 10px; -fx-padding: 10px; -fx-border-color: #ddd;");
 
-        // 💡 Effet d'ombre pour un design plus moderne
+        // ✅ Augmenter la largeur de la carte
+        card.setPrefWidth(350); // Augmentez cette valeur si nécessaire
+        card.setMaxWidth(Double.MAX_VALUE); // Permet d'occuper toute la largeur disponible
+
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.rgb(0, 0, 0, 0.3));
         shadow.setRadius(10);
@@ -135,22 +142,31 @@ public class HomeListVoitureController {
         card.setEffect(shadow);
 
         ImageView carImage = new ImageView();
-        carImage.setFitWidth(150);
-        carImage.setFitHeight(100);
+        carImage.setFitWidth(200); // Augmenter la largeur de l'image également
+        carImage.setFitHeight(120);
         chargerImageVoiture(carImage, voiture.getImagePath());
 
         Label carMarque = new Label(voiture.getMarque());
-        carMarque.setStyle("-fx-font-weight: bold;");
+        carMarque.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
 
         Label carModel = new Label(voiture.getModele());
         Label carPrice = new Label(voiture.getPrix_par_jour() + " TND Par Jour");
-        carPrice.setStyle("-fx-text-fill: green;");
+        carPrice.setStyle("-fx-text-fill: green; -fx-font-size: 12px;");
+
         Label conducteurPrice = new Label("Conducteur suppl.: " + voiture.getConducteurSupplementaire() + " TND");
         conducteurPrice.setStyle("-fx-text-fill: blue;");
 
+        Label promotionLabel = new Label();
+        Promotions promo = getPromotionForVoiture(voiture.getId());
+
+        if (promo != null) {
+            double prixApresReduction = voiture.getPrix_par_jour() * (1 - promo.getReduction() / 100);
+            promotionLabel.setText("🔥 Promo: -" + promo.getReduction() + "% (" + prixApresReduction + " TND)");
+            promotionLabel.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-padding: 3px; -fx-font-weight: bold;");
+        }
+
         Button reserverButton = new Button("📅 Réserver");
 
-        // ✅ Désactiver le bouton "Réserver" si la voiture est déjà réservée
         if ("Réservée".equalsIgnoreCase(voiture.getStatut())) {
             reserverButton.setDisable(true);
             reserverButton.setText("⛔ Indisponible");
@@ -159,13 +175,30 @@ public class HomeListVoitureController {
             reserverButton.setOnAction(event -> reserverVoiture(event, voiture));
         }
 
-
         HBox buttonBox = new HBox(10, reserverButton);
         buttonBox.setAlignment(Pos.CENTER);
 
-        card.getChildren().addAll(carImage, carMarque, carModel, carPrice, conducteurPrice, buttonBox);
+        if (promo != null) {
+            card.getChildren().addAll(carImage, carMarque, carModel, carPrice,conducteurPrice, promotionLabel, buttonBox);
+        } else {
+            card.getChildren().addAll(carImage, carMarque, carModel, carPrice,conducteurPrice, buttonBox);
+        }
+
         return card;
     }
+
+
+
+    private Promotions getPromotionForVoiture(int voitureId) {
+        List<Promotions> promotions = promotionService.getAllPromotions();
+        for (Promotions promo : promotions) {
+            if (promo.getVoiture_id() == voitureId) {
+                return promo;
+            }
+        }
+        return null;
+    }
+
 
 
     private void reserverVoiture(javafx.event.ActionEvent event, Voiture voiture) {

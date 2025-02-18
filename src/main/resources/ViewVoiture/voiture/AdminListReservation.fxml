@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+            fx:controller="com.esprit.controllers.Voiture.AdminListReservationController"
+            prefWidth="900" prefHeight="600"> <!-- Augmenter la taille de la fenêtre -->
 
+    <VBox spacing="15" alignment="CENTER" style="-fx-padding: 20px;" AnchorPane.topAnchor="10" AnchorPane.leftAnchor="10"
+          AnchorPane.rightAnchor="10" AnchorPane.bottomAnchor="10">
+
+        <Label text="📋 Mes Réservations" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+
+        <TableView fx:id="reservationsTable" prefWidth="850" prefHeight="500"> <!-- Augmenter la taille du tableau -->
+            <columns>
+                <TableColumn fx:id="colId" text="ID Réservation" prefWidth="100"/>
+                <TableColumn fx:id="colVoitureId" text="ID Voiture" prefWidth="100"/>
+                <TableColumn fx:id="colDateDebut" text="Date Début" prefWidth="130"/>
+                <TableColumn fx:id="colDateFin" text="Date Fin" prefWidth="130"/>
+                <TableColumn fx:id="colStatut" text="Statut" prefWidth="110"/>
+                <TableColumn fx:id="colPrixFinale" text="Prix Total (TND)" prefWidth="140"/>
+                <TableColumn fx:id="colAnnuler" text="Action" prefWidth="140"/> <!-- Plus d'espace pour le bouton -->
+                <TableColumn fx:id="colAccepter" text="Accepter" prefWidth="140"/>
+            </columns>
+        </TableView>
+    </VBox>
 </AnchorPane>
+
+
+

@@ -1,7 +1,7 @@
 /* 🌆 Fond d'écran */
 #root
 
-/* 📦 Carte blanche centrale */
+    /* 📦 Carte blanche centrale */
 #card {
     -fx-background-color: rgba(255, 255, 255, 0.9);
     -fx-padding: 20px;
@@ -55,6 +55,7 @@
 .btn-red:hover {
     -fx-background-color: #c82333;
 }
+
 .button-ajouter {
     -fx-background-color: #27ae60;
     -fx-text-fill: white;
@@ -80,4 +81,17 @@
 
 .button-voir-liste:hover {
     -fx-background-color: #3498db;
+}
+
+/* 🎨 Boutons GestionUser */
+.GestionUser {
+    -fx-background-color: #696969;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px 15px;
+}
+
+.GestionUser:hover {
+    -fx-background-color: #8c8c8c;
 }

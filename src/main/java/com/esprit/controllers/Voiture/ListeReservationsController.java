@@ -45,23 +45,20 @@ public class ListeReservationsController {
     public void initialize() {
         reservationService = new ReservationService();
 
-        // ✅ Associer les colonnes avec les attributs corrects
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colVoitureId.setCellValueFactory(new PropertyValueFactory<>("voiture_id"));
-
         colDateDebut.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDate_debut().toString())
         );
         colDateFin.setCellValueFactory(cellData ->
                 new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDate_fin().toString())
         );
-
         colStatut.setCellValueFactory(new PropertyValueFactory<>("statut"));
         colPrixFinale.setCellValueFactory(new PropertyValueFactory<>("prix_finale"));
 
-        // ✅ Ajouter la colonne "Annuler" avec un bouton de suppression
         colAnnuler.setCellFactory(param -> new TableCell<>() {
             private final Button btnSupprimer = new Button("🗑 Annuler");
+            private final Label lblConfirme = new Label("✔ Confirmée");
 
             {
                 btnSupprimer.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 12px;");
@@ -77,18 +74,22 @@ public class ListeReservationsController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(btnSupprimer);
+                    Reservations reservation = getTableView().getItems().get(getIndex());
+                    if ("confirmée".equals(reservation.getStatut().toLowerCase())) {
+                        setGraphic(lblConfirme);
+                    } else {
+                        setGraphic(btnSupprimer);
+                    }
                 }
             }
-
         });
 
-        // ✅ Charger les réservations
+        // Charger les réservations
         loadReservations(1);
 
-        // ✅ Ajouter un événement de double-clic pour afficher la facture
+        // Double-clic pour afficher la facture
         reservationsTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) { // Double-clic
+            if (event.getClickCount() == 2) {
                 Reservations selectedReservation = reservationsTable.getSelectionModel().getSelectedItem();
                 if (selectedReservation != null) {
                     showInvoice(selectedReservation);
@@ -99,13 +100,6 @@ public class ListeReservationsController {
 
     private void loadReservations(int utilisateurId) {
         ObservableList<Reservations> reservationsList = reservationService.getReservationsByClient(utilisateurId);
-
-        if (reservationsList.isEmpty()) {
-            System.out.println("❌ Aucune réservation trouvée !");
-        } else {
-            System.out.println("✅ Nombre de réservations trouvées : " + reservationsList.size());
-        }
-
         reservationsTable.setItems(reservationsList);
     }
 
@@ -114,7 +108,6 @@ public class ListeReservationsController {
             String query = "DELETE FROM reservations WHERE id = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, reservation.getId());
-
             int deletedRows = preparedStatement.executeUpdate();
             if (deletedRows > 0) {
                 showAlert("Succès", "Réservation supprimée avec succès !");
@@ -134,14 +127,22 @@ public class ListeReservationsController {
             Parent root = loader.load();
 
             InvoiceController controller = loader.getController();
-            controller.setReservationDetails(reservation);
+            if (controller != null) {
+                controller.setReservationDetails(reservation);
+            } else {
+                System.out.println("❌ Erreur : Impossible de charger InvoiceController !");
+                return;
+            }
 
             Stage stage = new Stage();
             stage.setTitle("Facture de Réservation");
             stage.setScene(new Scene(root));
             stage.show();
+
+            System.out.println("✅ Facture affichée pour la réservation ID : " + reservation.getId());
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("❌ Erreur : Impossible d’ouvrir Invoice.fxml !");
         }
     }
 

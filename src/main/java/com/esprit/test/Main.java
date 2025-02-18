@@ -16,7 +16,7 @@ public class Main extends Application {
             URL fxmlUrl = getClass().getResource("/ViewVoiture/voiture/liste_voitures.fxml");
 
             FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
-            Scene scene = new Scene(fxmlLoader.load(), 1000, 700);
+            Scene scene = new Scene(fxmlLoader.load(), 1200, 700);
 
             stage.setTitle("Liste Voiture!");
             stage.setScene(scene);

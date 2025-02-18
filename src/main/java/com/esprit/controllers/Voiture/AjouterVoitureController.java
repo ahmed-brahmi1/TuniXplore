@@ -2,8 +2,10 @@ package com.esprit.controllers.Voiture;
 
 import com.esprit.models.Voiture;
 import com.esprit.services.services_voiture.ServiceVoiture;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -199,5 +201,21 @@ public class AjouterVoitureController {
         alert.setHeaderText(null);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void ouvrirGestionVoitures(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewVoiture/Voiture/liste_Voitures.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la fenêtre actuelle et changer la scène
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Gestion des Voitures");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

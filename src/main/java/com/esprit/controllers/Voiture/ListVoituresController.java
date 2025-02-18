@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -19,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import javafx.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -47,6 +49,8 @@ public class ListVoituresController {
     private Button ajouterVoitureButton;
     @FXML
     private Button HomeClientButton;
+    @FXML
+    private Button gestionVoituresButton;
 
     private final ServiceVoiture serviceVoiture = new ServiceVoiture();
     private ObservableList<Voiture> voituresList = FXCollections.observableArrayList();
@@ -302,6 +306,48 @@ public class ListVoituresController {
     }
 
 
+    @FXML
+    private void afficherReservations() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewVoiture/voiture/AdminListReservation.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Mes Réservations");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    private void afficherPromotions() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewVoiture/voiture/GestionPromotions.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Promotions");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void ouvrirGestionVoitures(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewVoiture/Voiture/liste_Voitures.fxml"));
+            Parent root = loader.load();
+
+            // Obtenir la fenêtre actuelle et changer la scène
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Gestion des Voitures");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

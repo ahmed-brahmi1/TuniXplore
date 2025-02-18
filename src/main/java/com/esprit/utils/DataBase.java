@@ -27,7 +27,7 @@ public class DataBase {
         return instance;
     }
 
-    public Connection getConnection() {
+    public  Connection getConnection() {
         return connection;
     }
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -12,50 +14,55 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700" prefWidth="1000" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Voiture.AjouterVoitureController">
-
+<AnchorPane prefHeight="700" prefWidth="1000.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Voiture.AjouterVoitureController">
+    <stylesheets>
+        <URL value="@styles.css" />
+    </stylesheets>
+    <HBox prefHeight="700.0" prefWidth="1000.0" spacing="0">
     <!-- Conteneur principal -->
     <StackPane prefHeight="Infinity" prefWidth="Infinity" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
         <!-- Image de fond avec flou -->
-        <ImageView fitHeight="700" fitWidth="1000" opacity="0.3" preserveRatio="false">
+        <ImageView fitHeight="708.0" fitWidth="1105.0" opacity="0.3" preserveRatio="false">
             <Image url="@../images/voiture.jpg" />
         </ImageView>
-
+   
+   
         <!-- Formulaire centré -->
-        <VBox alignment="CENTER" maxHeight="600" maxWidth="600" spacing="20" style="-fx-padding: 40px;                      -fx-background-color: #ffffff;                      -fx-background-radius: 15px;                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);">
-
+        <VBox alignment="CENTER" maxHeight="600" maxWidth="-Infinity" prefHeight="600.0" prefWidth="509.0" spacing="20.0" style="-fx-padding: 40px;-fx-background-color: #ffffff;                      -fx-background-radius: 15px;                      -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);">
+   
             <!-- Titre -->
             <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Ajouter une Voiture" />
-
+   
             <!-- Formulaire -->
             <VBox maxWidth="500" spacing="15">
                 <HBox spacing="15">
                     <Label prefHeight="25.0" prefWidth="91.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Marque:" />
                     <TextField fx:id="marqueField" prefWidth="350" style="-fx-background-color: #ecf0f1;" />
                 </HBox>
-
+   
                 <HBox spacing="15">
                     <Label prefHeight="25.0" prefWidth="91.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Modèle:" />
                     <TextField fx:id="modeleField" prefWidth="350" style="-fx-background-color: #ecf0f1;" />
                 </HBox>
-
+   
                 <HBox spacing="15">
                     <Label prefHeight="25.0" prefWidth="91.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Année:" />
                     <TextField fx:id="anneeField" prefHeight="25.0" prefWidth="351.0" style="-fx-background-color: #ecf0f1;" />
                 </HBox>
-
+   
                 <HBox spacing="15">
                     <Label prefHeight="25.0" prefWidth="92.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Prix / Jour:" />
                     <TextField fx:id="prixField" prefWidth="350" style="-fx-background-color: #ecf0f1;" />
                 </HBox>
-
+   
                 <HBox spacing="15">
                     <Label prefHeight="25.0" prefWidth="92.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Conducteur" />
-                    <TextField fx:id="conducteurSupplementaireField" prefWidth="350" style="-fx-background-color: #ecf0f1; -fx-background-radius: 8px;"/>
+                    <TextField fx:id="conducteurSupplementaireField" prefWidth="350" style="-fx-background-color: #ecf0f1; -fx-background-radius: 8px;" />
                 </HBox>
-
+   
                 <HBox spacing="15">
                     <Label prefHeight="25.0" prefWidth="92.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Statut:" />
                     <ComboBox fx:id="statutComboBox" prefWidth="350" style="-fx-background-color: #ecf0f1;">
@@ -68,28 +75,65 @@
                     </ComboBox>
                 </HBox>
             </VBox>
-
+   
             <!-- Section image -->
             <HBox alignment="CENTER" centerShape="false" prefHeight="100.0" prefWidth="509.0" spacing="15">
                 <Label prefHeight="25.0" prefWidth="132.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Image :" />
                 <ImageView fx:id="voitureImageView" fitHeight="100" fitWidth="197.0" style="-fx-border-color: #7f8c8d; -fx-border-width: 1px;" />
                 <Button fx:id="choisirImageButton" onAction="#choisirImage" prefHeight="30.0" prefWidth="136.0" style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-size: 14px;" text="Choisir Image" />
             </HBox>
-
-
-
+   
+   
+   
             <!-- Boutons avec effet hover -->
             <HBox alignment="CENTER" spacing="30">
-                <Button fx:id="ajouterButton" onAction="#ajouterVoiture" onMouseEntered="#handleMouseEnteredAjouter" onMouseExited="#handleMouseExitedAjouter" style="-fx-background-color: #27ae60; -fx-text-fill: white;" prefWidth="150" prefHeight="50"  text="Ajouter" />
-
-                <Button fx:id="annulerButton" onAction="#ouvrirListeVoitures" onMouseEntered="#handleMouseEnteredAnnuler" onMouseExited="#handleMouseExitedAnnuler" style="-fx-background-color: #c0392b; -fx-text-fill: white;" prefWidth="150" prefHeight="50"  text="Annuler" />
-
-                <Button fx:id="voirListeButton" onAction="#ouvrirListeVoitures" onMouseEntered="#handleMouseEnteredVoirListe" onMouseExited="#handleMouseExitedVoirListe" style="-fx-background-color: #2980b9; -fx-text-fill: white;" prefWidth="150" prefHeight="50" text="Voir Liste" />
-
+                <Button fx:id="ajouterButton" onAction="#ajouterVoiture" onMouseEntered="#handleMouseEnteredAjouter" onMouseExited="#handleMouseExitedAjouter" prefHeight="50" prefWidth="150" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="Ajouter" />
+   
+                <Button fx:id="annulerButton" onAction="#ouvrirListeVoitures" onMouseEntered="#handleMouseEnteredAnnuler" onMouseExited="#handleMouseExitedAnnuler" prefHeight="50" prefWidth="150" style="-fx-background-color: #c0392b; -fx-text-fill: white;" text="Annuler" />
+   
+                <Button fx:id="voirListeButton" onAction="#ouvrirListeVoitures" onMouseEntered="#handleMouseEnteredVoirListe" onMouseExited="#handleMouseExitedVoirListe" prefHeight="50" prefWidth="150" style="-fx-background-color: #2980b9; -fx-text-fill: white;" text="Voir Liste" />
+   
             </HBox>
-
+            <StackPane.margin>
+               <Insets left="180.0" />
+            </StackPane.margin>
+   
         </VBox>
 
     </StackPane>
-
+    </HBox>
+   <VBox layoutX="-3.0" prefHeight="710.0" prefWidth="197.0" style="-fx-background-color: #696969; -fx-padding: 10px;">
+      <children>
+         <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@images/tuni.png" />
+            </image>
+         </ImageView>
+         <Button prefHeight="74.0" prefWidth="187.0" styleClass="GestionUser" text="Gestion des utilisateurs" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
+         <Button prefHeight="79.0" prefWidth="184.0" styleClass="GestionUser" text="Gestion des hôtels" textFill="WHITE">
+            <font>
+               <Font size="17.0" />
+            </font>
+         </Button>
+         <Button onAction="#ouvrirGestionVoitures" prefHeight="81.0" prefWidth="213.0" styleClass="GestionUser" text="Gestion des voitures" textFill="WHITE">
+            <font>
+               <Font size="15.0" />
+            </font>
+         </Button>
+         <Button prefHeight="93.0" prefWidth="208.0" styleClass="GestionUser" text="Gestion des vols" textFill="WHITE">
+            <font>
+               <Font size="18.0" />
+            </font>
+         </Button>
+         <Button prefHeight="91.0" prefWidth="200.0" styleClass="GestionUser" text="Gestion des forums" textFill="WHITE">
+            <font>
+               <Font size="16.0" />
+            </font>
+         </Button>
+      </children>
+   </VBox>
 </AnchorPane>

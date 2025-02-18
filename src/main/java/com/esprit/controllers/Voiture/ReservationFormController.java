@@ -1,5 +1,6 @@
 package com.esprit.controllers.Voiture;
 
+import com.esprit.models.Promotions;
 import com.esprit.models.Voiture;
 import com.esprit.utils.DataBase;
 import javafx.fxml.FXML;
@@ -12,10 +13,7 @@ import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -33,12 +31,10 @@ public class ReservationFormController {
         connection = DataBase.getInstance().getConnection();
     }
 
-
     private Voiture voitureSelectionnee;
 
     @FXML
     public void initialize() {
-        // Ajoute des événements pour recalculer le prix dès que l'utilisateur choisit une date
         dateDebutPicker.setOnAction(event -> calculerPrixFinal());
         dateFinPicker.setOnAction(event -> calculerPrixFinal());
         conducteurCheckBox.setOnAction(event -> calculerPrixFinal());
@@ -59,16 +55,26 @@ public class ReservationFormController {
             return;
         }
 
-        if (dateDebutPicker.getValue() != null && dateFinPicker.getValue() != null) {
-            long jours = ChronoUnit.DAYS.between(dateDebutPicker.getValue(), dateFinPicker.getValue());
+        LocalDate dateDebut = dateDebutPicker.getValue();
+        LocalDate dateFin = dateFinPicker.getValue();
+
+        if (dateDebut != null && dateFin != null) {
+            long jours = ChronoUnit.DAYS.between(dateDebut, dateFin);
 
             if (jours > 0) {
                 double prixBase = jours * voitureSelectionnee.getPrix_par_jour();
                 double prixConducteur = conducteurCheckBox.isSelected() ? jours * voitureSelectionnee.getConducteurSupplementaire() : 0;
 
-                double prixFinal = prixBase + prixConducteur;
+                Promotions promo = getPromotionForVoiture(voitureSelectionnee.getId());
+                double reduction = (promo != null) ? promo.getReduction() / 100.0 : 0.0;
 
-                prixFinalLabel.setText("Prix Final: " + prixFinal + " TND");
+                double prixFinal = (prixBase + prixConducteur) * (1 - reduction);
+
+                if (promo != null) {
+                    prixFinalLabel.setText(String.format("Prix Final: %.2f TND (-%.0f%% promo)", prixFinal, promo.getReduction()));
+                } else {
+                    prixFinalLabel.setText(String.format("Prix Final: %.2f TND", prixFinal));
+                }
             } else {
                 prixFinalLabel.setText("Sélectionner des dates valides !");
             }
@@ -77,6 +83,24 @@ public class ReservationFormController {
         }
     }
 
+    private Promotions getPromotionForVoiture(int voitureId) {
+        Promotions promo = null;
+        String query = "SELECT reduction FROM promotions WHERE voiture_id = ? AND NOW() BETWEEN date_debut AND date_fin";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, voitureId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                promo = new Promotions();
+                promo.setReduction(rs.getDouble("reduction"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return promo;
+    }
 
     @FXML
     public void annulerReservation(ActionEvent event) {
@@ -96,7 +120,7 @@ public class ReservationFormController {
     @FXML
     private void enregistrerReservation() {
         try {
-            int utilisateur_id = 1; // Remplacer par l'ID du client connecté
+            int utilisateur_id = 1;
             int voiture_id = Integer.parseInt(idField.getText());
             LocalDate dateDebut = dateDebutPicker.getValue();
             LocalDate dateFin = dateFinPicker.getValue();
@@ -113,10 +137,12 @@ public class ReservationFormController {
                 return;
             }
 
-            // Récupérer la valeur du prix final affiché
-            String prixText = prixFinalLabel.getText().replace("Prix Final: ", "").replace(" TND", "").trim();
-            double prixFinale;
+            String prixText = prixFinalLabel.getText().replaceAll("[^0-9.,]", "").trim();
+            if (prixText.contains(",")) {
+                prixText = prixText.replace(",", ".");
+            }
 
+            double prixFinale;
             try {
                 prixFinale = Double.parseDouble(prixText);
             } catch (NumberFormatException e) {
@@ -124,7 +150,6 @@ public class ReservationFormController {
                 return;
             }
 
-            // Vérifier si l'utilisateur a ajouté un conducteur supplémentaire
             boolean conducteurSupplementaire = conducteurCheckBox.isSelected();
 
             String query = "INSERT INTO reservations (utilisateur_id, voiture_id, date_debut, date_fin, statut, prix_finale, conducteur_supplementaire) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -135,13 +160,11 @@ public class ReservationFormController {
             preparedStatement.setDate(4, Date.valueOf(dateFin));
             preparedStatement.setString(5, statut);
             preparedStatement.setDouble(6, prixFinale);
-            preparedStatement.setBoolean(7, conducteurSupplementaire); // Stocker en tant que booléen (1 ou 0)
+            preparedStatement.setBoolean(7, conducteurSupplementaire);
 
             int rowsInserted = preparedStatement.executeUpdate();
             if (rowsInserted > 0) {
                 showAlert("Succès", "Réservation enregistrée avec succès !");
-
-                // 🔹 Redirection vers la page de la liste des voitures
                 retournerAListeVoitures();
             } else {
                 showAlert("Erreur", "Échec de l'enregistrement !");
@@ -153,13 +176,11 @@ public class ReservationFormController {
         }
     }
 
-
     private void retournerAListeVoitures() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewVoiture/voiture/EspaceClientVoiture/Home_Client.fxml"));
             Parent root = loader.load();
 
-            // Obtenir la scène actuelle
             Stage stage = (Stage) confirmerButton.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -171,9 +192,6 @@ public class ReservationFormController {
         }
     }
 
-
-
-
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -181,5 +199,4 @@ public class ReservationFormController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }

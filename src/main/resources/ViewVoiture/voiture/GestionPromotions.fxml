@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<AnchorPane prefHeight="826.0" prefWidth="982.0" style="-fx-background-color: #f4f4f4; -fx-padding: 40px;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Voiture.GestionPromotionsController">
+
+
+    <StackPane alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="740.0" prefWidth="941.0" spacing="25">
+      
+            <!-- Titre -->
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333;" text="Gestion des Promotions" />
+
+            <!-- TableView centré -->
+            <StackPane alignment="CENTER">
+                <TableView fx:id="tablePromotions" prefHeight="421.0" prefWidth="800.0">
+                    <columns>
+                        <TableColumn fx:id="colId" prefWidth="70" text="ID" />
+                        <TableColumn fx:id="colVoitureId" prefWidth="150" text="Voiture ID" />
+                        <TableColumn fx:id="colReduction" prefWidth="130" text="Réduction (%)" />
+                        <TableColumn fx:id="colDateDebut" prefWidth="180" text="Date Début" />
+                        <TableColumn fx:id="colDateFin" prefWidth="180" text="Date Fin" />
+                    </columns>
+                </TableView>
+            </StackPane>
+
+            <!-- Formulaire -->
+            <GridPane alignment="CENTER" hgap="15" vgap="15">
+                <padding>
+                    <Insets bottom="15" left="15" right="15" top="15" />
+                </padding>
+
+                <Label text="Voiture :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <ComboBox fx:id="comboVoitureId" prefWidth="250" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Réduction (%) :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="txtReduction" prefWidth="250" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Date Début:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <DatePicker fx:id="dateDebut" prefWidth="250" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Date Fin:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <DatePicker fx:id="dateFin" prefWidth="250" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <columnConstraints>
+               <ColumnConstraints />
+               <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+
+            <!-- Boutons -->
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="957.0" spacing="20">
+                <Button fx:id="btnAjouter" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px 20px;" text="Ajouter Promotion" />
+                <Button fx:id="btnSupprimer" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px 20px;" text="Supprimer" />
+            </HBox>
+
+        </VBox>
+    </StackPane>
 
 </AnchorPane>

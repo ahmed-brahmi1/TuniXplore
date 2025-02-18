@@ -1,6 +1,6 @@
-package com.example.voiture.models;
+package com.esprit.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Promotions {
     private int id;
@@ -9,44 +9,8 @@ public class Promotions {
     private Date date_debut;
     private Date date_fin;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getVoiture_id() {
-        return voiture_id;
-    }
-
-    public void setVoiture_id(int voiture_id) {
-        this.voiture_id = voiture_id;
-    }
-
-    public double getReduction() {
-        return reduction;
-    }
-
-    public void setReduction(double reduction) {
-        this.reduction = reduction;
-    }
-
-    public Date getDate_debut() {
-        return date_debut;
-    }
-
-    public void setDate_debut(Date date_debut) {
-        this.date_debut = date_debut;
-    }
-
-    public Date getDate_fin() {
-        return date_fin;
-    }
-
-    public void setDate_fin(Date date_fin) {
-        this.date_fin = date_fin;
+    // ✅ Constructeur sans paramètres (solution au problème)
+    public Promotions() {
     }
 
     public Promotions(int id, int voiture_id, double reduction, Date date_debut, Date date_fin) {
@@ -63,6 +27,18 @@ public class Promotions {
         this.date_debut = date_debut;
         this.date_fin = date_fin;
     }
+
+    // Getters et Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public int getVoiture_id() { return voiture_id; }
+    public void setVoiture_id(int voiture_id) { this.voiture_id = voiture_id; }
+    public double getReduction() { return reduction; }
+    public void setReduction(double reduction) { this.reduction = reduction; }
+    public Date getDate_debut() { return date_debut; }
+    public void setDate_debut(Date date_debut) { this.date_debut = date_debut; }
+    public Date getDate_fin() { return date_fin; }
+    public void setDate_fin(Date date_fin) { this.date_fin = date_fin; }
 
     @Override
     public String toString() {
