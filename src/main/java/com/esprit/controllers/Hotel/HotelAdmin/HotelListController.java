@@ -2,9 +2,12 @@ package com.esprit.controllers.Hotel.HotelAdmin;
 
 import com.esprit.models.Hotel;
 import com.esprit.services.Hotel.serviceHotel;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -14,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -156,4 +160,22 @@ public class HotelListController {
             System.out.println("Error loading hotel details: " + e.getMessage());
         }
     }
-}
+
+    public void handleGestionReservations(ActionEvent actionEvent) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionHotel/reservationList.fxml"));
+                Parent reservationListView = loader.load();
+
+                // Get the current stage and set the new scene
+                Stage stage = (Stage) hotelGrid.getScene().getWindow();
+                stage.setScene(new Scene(reservationListView));
+                stage.setTitle("Reservation List");
+                stage.show();
+            } catch (IOException e) {
+                System.out.println("Error Failed to load reservation list: " + e.getMessage());
+            }
+        }
+
+
+    }
+

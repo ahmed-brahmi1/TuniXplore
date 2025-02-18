@@ -1,98 +1,151 @@
 package com.esprit.models;
 
+import javafx.beans.property.*;
+
 import java.time.LocalDate;
 
 public class RoomReservation {
-    private int id;
-    private int roomId;
-    private String guestName;
-    private LocalDate checkInDate;
-    private LocalDate checkOutDate;
-    private double totalPrice;
-    private int roomNumber; // Add room number
-    private String roomType;
-    private String hotelName;  // New field
+    private final IntegerProperty id = new SimpleIntegerProperty(this, "id");
+    private final IntegerProperty roomId = new SimpleIntegerProperty(this, "roomId");
+    private final StringProperty guestName = new SimpleStringProperty(this, "guestName");
+    private final ObjectProperty<LocalDate> checkInDate = new SimpleObjectProperty<>(this, "checkInDate");
+    private final ObjectProperty<LocalDate> checkOutDate = new SimpleObjectProperty<>(this, "checkOutDate");
+    private final DoubleProperty totalPrice = new SimpleDoubleProperty(this, "totalPrice");
+    private final IntegerProperty roomNumber = new SimpleIntegerProperty(this, "roomNumber");
+    private final StringProperty roomType = new SimpleStringProperty(this, "roomType");
+    private final StringProperty hotelName = new SimpleStringProperty(this, "hotelName");
+    private final BooleanProperty isConfirmed = new SimpleBooleanProperty(this, "isConfirmed");
 
-    public RoomReservation(int roomId, String guestName, LocalDate checkInDate, LocalDate checkOutDate, double totalPrice, int roomNumber, String roomType, String hotelName) {
-        this.roomId = roomId;
-        this.guestName = guestName;
-        this.checkInDate = checkInDate;
-        this.checkOutDate = checkOutDate;
-        this.totalPrice = totalPrice;
-        this.roomNumber = roomNumber;
-        this.roomType = roomType;
-        this.hotelName = hotelName; // Initialize new field
+    public RoomReservation(int roomId, String guestName, LocalDate checkInDate, LocalDate checkOutDate, double totalPrice, int roomNumber, String roomType, String hotelName, boolean isConfirmed) {
+        this.roomId.set(roomId);
+        this.guestName.set(guestName);
+        this.checkInDate.set(checkInDate);
+        this.checkOutDate.set(checkOutDate);
+        this.totalPrice.set(totalPrice);
+        this.roomNumber.set(roomNumber);
+        this.roomType.set(roomType);
+        this.hotelName.set(hotelName);
+        this.isConfirmed.set(isConfirmed);
     }
 
-    public String getHotelName() {
-        return hotelName;
-    }
-
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
-    }
-
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public String getRoomType() {
-        return roomType;
-    }
-
-    public void setRoomType(String roomType) {
-        this.roomType = roomType;
-    }
-
+    // Getters and Setters for properties
     public int getId() {
-        return id;
+        return id.get();
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id.set(id);
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public void setCheckOutDate(LocalDate checkOutDate) {
-        this.checkOutDate = checkOutDate;
-    }
-
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
-
-    public void setCheckInDate(LocalDate checkInDate) {
-        this.checkInDate = checkInDate;
-    }
-
-    public String getGuestName() {
-        return guestName;
-    }
-
-    public void setGuestName(String guestName) {
-        this.guestName = guestName;
+    public IntegerProperty idProperty() {
+        return id;
     }
 
     public int getRoomId() {
-        return roomId;
+        return roomId.get();
     }
 
     public void setRoomId(int roomId) {
-        this.roomId = roomId;
+        this.roomId.set(roomId);
+    }
+
+    public IntegerProperty roomIdProperty() {
+        return roomId;
+    }
+
+    public String getGuestName() {
+        return guestName.get();
+    }
+
+    public void setGuestName(String guestName) {
+        this.guestName.set(guestName);
+    }
+
+    public StringProperty guestNameProperty() {
+        return guestName;
+    }
+
+    public LocalDate getCheckInDate() {
+        return checkInDate.get();
+    }
+
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate.set(checkInDate);
+    }
+
+    public ObjectProperty<LocalDate> checkInDateProperty() {
+        return checkInDate;
+    }
+
+    public LocalDate getCheckOutDate() {
+        return checkOutDate.get();
+    }
+
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate.set(checkOutDate);
+    }
+
+    public ObjectProperty<LocalDate> checkOutDateProperty() {
+        return checkOutDate;
+    }
+
+    public double getTotalPrice() {
+        return totalPrice.get();
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice.set(totalPrice);
+    }
+
+    public DoubleProperty totalPriceProperty() {
+        return totalPrice;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber.get();
+    }
+
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber.set(roomNumber);
+    }
+
+    public IntegerProperty roomNumberProperty() {
+        return roomNumber;
+    }
+
+    public String getRoomType() {
+        return roomType.get();
+    }
+
+    public void setRoomType(String roomType) {
+        this.roomType.set(roomType);
+    }
+
+    public StringProperty roomTypeProperty() {
+        return roomType;
+    }
+
+    public String getHotelName() {
+        return hotelName.get();
+    }
+
+    public void setHotelName(String hotelName) {
+        this.hotelName.set(hotelName);
+    }
+
+    public StringProperty hotelNameProperty() {
+        return hotelName;
+    }
+
+    public boolean isConfirmed() {
+        return isConfirmed.get();
+    }
+
+    public void setConfirmed(boolean confirmed) {
+        this.isConfirmed.set(confirmed);
+    }
+
+    public BooleanProperty isConfirmedProperty() {
+        return isConfirmed;
     }
 }

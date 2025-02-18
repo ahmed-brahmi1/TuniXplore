@@ -16,7 +16,7 @@ public class RoomReservationService {
     }
 
     public void saveReservation(RoomReservation reservation) throws SQLException {
-        String query = "INSERT INTO room_reservations (room_id, guest_name, check_in, check_out, total_price, room_number, room_type, hotel_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO room_reservations (room_id, guest_name, check_in, check_out, total_price, room_number, room_type, hotel_name, isConfirmed) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement pstmt = connection.prepareStatement(query)) {
             pstmt.setInt(1, reservation.getRoomId());
@@ -26,7 +26,8 @@ public class RoomReservationService {
             pstmt.setDouble(5, reservation.getTotalPrice());
             pstmt.setInt(6, reservation.getRoomNumber());
             pstmt.setString(7, reservation.getRoomType());
-            pstmt.setString(8, reservation.getHotelName()); // Set hotel name
+            pstmt.setString(8, reservation.getHotelName());
+            pstmt.setBoolean(9, reservation.isConfirmed());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ERROR SAVING RESERVATION " + e.getMessage());
@@ -61,11 +62,23 @@ public class RoomReservationService {
                         rs.getDouble("total_price"),
                         rs.getInt("room_number"),
                         rs.getString("room_type"),
-                        rs.getString("hotel_name")
+                        rs.getString("hotel_name"),
+                        rs.getBoolean("isConfirmed")
                 );
                 reservations.add(reservation);
             }
         }
         return reservations;
+    }
+
+    public void confirmReservation(int id, boolean confirmed) {
+        String query = "UPDATE room_reservations SET isConfirmed = ? WHERE id = ?";
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setBoolean(1, confirmed);
+            pstmt.setInt(2, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

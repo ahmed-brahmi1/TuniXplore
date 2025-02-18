@@ -119,6 +119,14 @@
                     <Font size="17.0" />
                 </font>
             </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="307.0" styleClass="GestionUser" text="Gestion des Réservation" textFill="WHITE" onAction="#handleGestionReservations">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
             <Button mnemonicParsing="false" style="-fx-background-color: transparent;" />
 
         </children>

@@ -79,7 +79,8 @@ public class ReservationDialog {
                             calculateTotalPrice(room, checkInDate.getValue(), checkOutDate.getValue()),
                             room.getRoomNumber(),
                             room.getRoomType(),
-                            hotelName
+                            hotelName,
+                            true
 
                     );
                 } else {
