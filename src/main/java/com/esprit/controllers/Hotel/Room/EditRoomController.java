@@ -8,8 +8,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,8 @@ public class EditRoomController {
     private CheckBox tvCheckBox;
     @FXML
     private CheckBox breakfastCheckBox;
+    @FXML
+    private ImageView roomImageView; // ImageView for displaying the selected image
 
     private Room currentRoom;
     private RoomService roomService;
@@ -61,12 +67,34 @@ public class EditRoomController {
             acCheckBox.setSelected(currentRoom.getAmenities().contains("Air Conditioning"));
             tvCheckBox.setSelected(currentRoom.getAmenities().contains("TV"));
             breakfastCheckBox.setSelected(currentRoom.getAmenities().contains("Breakfast"));
+
+            // Load the current room image if available
+            if (currentRoom.getImageUrl() != null) {
+                roomImageView.setImage(new Image(new File(currentRoom.getImageUrl()).toURI().toString()));
+            }
         }
     }
 
     private void populateRoomTypes() {
         // Populate the room type ComboBox with available room types
         roomTypeComboBox.getItems().addAll("Single", "Double", "Suite", "Deluxe"); // Add your room types here
+    }
+
+    @FXML
+    private void handleSelectImage(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Room Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+        );
+
+        File selectedFile = fileChooser.showOpenDialog((Stage) roomNumberLabel.getScene().getWindow());
+        if (selectedFile != null) {
+            // Display the selected image in the ImageView
+            roomImageView.setImage(new Image(selectedFile.toURI().toString()));
+            // Optionally, you can store the path for later use
+            currentRoom.setImageUrl(selectedFile.getAbsolutePath()); // Assuming you have a method to set the image URL
+        }
     }
 
     @FXML
@@ -110,8 +138,21 @@ public class EditRoomController {
 
     @FXML
     private void handleCancel(ActionEvent event) {
-        // Logic to navigate back to the previous screen
-        // This can be similar to the handleBack method in RoomDetailsController
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionHotel/room-details.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller for RoomDetailsController
+            RoomDetailsController roomDetailsController = loader.getController();
+            roomDetailsController.setRoom(currentRoom); // Pass the updated room details
+
+            // Get the current stage and set the new scene
+            Stage stage = (Stage) roomNumberLabel.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Error", "Failed to navigate to room details: " + e.getMessage());
+        }
     }
 
     private List<String> getSelectedAmenities() {

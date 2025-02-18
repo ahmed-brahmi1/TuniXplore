@@ -116,7 +116,7 @@ public class RoomDetailsController {
     @FXML
     private void handleEdit(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esprit/demo1/room-edit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionHotel/room-edit.fxml"));
             Parent editRoomView = loader.load();
 
             EditRoomController controller = loader.getController();

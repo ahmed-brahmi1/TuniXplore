@@ -7,14 +7,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane" prefHeight="971.0" prefWidth="863.0" style="-fx-padding: 20; -fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Hotel.Room.RoomDetailsController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
 
+<AnchorPane fx:id="rootPane" style="-fx-padding: 20; -fx-background-color: #f0f0f0;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Hotel.Room.RoomDetailsController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
     <!-- Back Button -->
-    <HBox layoutX="30" layoutY="30">
+    <HBox layoutX="30" layoutY="30" AnchorPane.leftAnchor="210.0">
         <Button fx:id="backButton" onAction="#handleBack" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 8 15; -fx-font-size: 14; -fx-background-radius: 5;" text="← Back to Rooms" />
     </HBox>
 
-    <VBox alignment="CENTER" layoutX="30.0" layoutY="82.0" prefHeight="652.0" spacing="15" style="-fx-pref-width: 800; -fx-pref-height: 800; -fx-padding: 20;">
+    <VBox alignment="CENTER" layoutX="30.0" layoutY="82.0" prefHeight="652.0" spacing="15" style="-fx-pref-width: 800; -fx-pref-height: 800; -fx-padding: 20;" AnchorPane.leftAnchor="200.0">
 
         <!-- Room Image -->
         <ImageView fx:id="roomImageView" fitHeight="200.0" fitWidth="307.0" style="-fx-background-color: #e0e0e0; -fx-border-color: #ccc; -fx-border-radius: 10; -fx-effect: dropshadow(gaussian, #888888, 10, 0, 0, 5);" />
@@ -46,5 +54,59 @@
             <Button fx:id="editButton" onAction="#handleEdit" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 10 20; -fx-font-size: 14; -fx-background-radius: 5;" text="Edit Room" />
             <Button fx:id="deleteButton" onAction="#handleDelete" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-padding: 10 20; -fx-font-size: 14; -fx-background-radius: 5;" text="Delete Room" />
         </HBox>
+    </VBox>
+    <VBox prefHeight="1000" prefWidth="220.0" style="-fx-background-color: #696969;">
+        <children>
+            <ImageView fitHeight="118.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/tuni.png" />
+                </image>
+            </ImageView>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="290.0" styleClass="GestionUser" text="Gestion des utilisateurs" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="30.0" />
+                </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="291.0" styleClass="GestionUser" text="Gestion des hôtels" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="292.0" styleClass="GestionUser" text="Gestion des voitures" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="297.0" styleClass="GestionUser" text="Gestion des vols" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="307.0" styleClass="GestionUser" text="Gestion des forums" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" />
+
+        </children>
     </VBox>
 </AnchorPane>

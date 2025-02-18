@@ -67,7 +67,7 @@ public class HotelDetailsController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Liste des Hôtels");
-            stage.setWidth(900);  // Set desired width
+            stage.setWidth(1100);  // Set desired width
             stage.setHeight(800);
             stage.show();
         } catch (IOException e) {
@@ -77,6 +77,8 @@ public class HotelDetailsController {
 
     public void setHotel(Hotel hotel) {
         this.currentHotel  = hotel;
+
+        System.out.println(currentHotel);
 
         // Set hotel information
         nameLabel.setText(hotel.getName());
@@ -203,7 +205,7 @@ public class HotelDetailsController {
 
             // Navigate back to the hotel list
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esprit/demo1/hotel-list.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionHotel/hotel-list.fxml"));
                 Parent hotelListView = loader.load();
 
                 // Get the stage from the current scene
@@ -221,7 +223,7 @@ public class HotelDetailsController {
     @FXML
     public void handleEdit(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esprit/demo1/edit-hotel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionHotel/edit-hotel.fxml"));
             Parent editView = loader.load();
 
             EditHotelController controller = loader.getController();
@@ -239,7 +241,7 @@ public class HotelDetailsController {
     @FXML
     private void handleListRooms(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/esprit/demo1/room-list.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/GestionHotel/room-list.fxml"));
             Parent roomListView = loader.load();
 
             RoomListController controller = loader.getController();

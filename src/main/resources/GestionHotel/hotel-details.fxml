@@ -12,12 +12,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import java.net.URL?>
 <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="800" prefWidth="1000" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Hotel.HotelAdmin.HotelDetailsController">
-
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
     <content>
         <HBox spacing="10" style="-fx-padding: 0;">
             <!-- Left VBox for management buttons -->
-            <VBox prefWidth="300.0" spacing="10" style="-fx-background-color: #696969; -fx-padding: 10;">
+            <VBox prefWidth="350.0" spacing="10" style="-fx-background-color: #696969; -fx-padding: 10;">
                 <ImageView fitHeight="118.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@images/tuni.png" />

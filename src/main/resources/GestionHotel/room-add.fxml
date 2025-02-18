@@ -43,7 +43,7 @@
 
                         <!-- Location Type Dropdown -->
                         <Label text="Location Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                        <ComboBox fx:id="locationTypeComboBox" prefHeight="43.0" prefWidth="76.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #3498db; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <ComboBox fx:id="locationTypeComboBox" minWidth="120.0" prefHeight="43.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #3498db; -fx-padding: 8;" GridPane.columnIndex="1" GridPane.rowIndex="0">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                     <String fx:value="Floor" />
@@ -62,11 +62,11 @@
                             <Button fx:id="browseButton" ellipsisString="Browse" onAction="#handleImageBrowse" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-padding: 8 15;" text="Browse" />
                             <Label fx:id="imagePathLabel" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;" />
                         </HBox>
-                  <rowConstraints>
-                     <RowConstraints />
-                     <RowConstraints />
-                     <RowConstraints />
-                  </rowConstraints>
+                        <rowConstraints>
+                            <RowConstraints />
+                            <RowConstraints />
+                            <RowConstraints />
+                        </rowConstraints>
 
                     </GridPane>
                     <Label style="-fx-font-size: 14px;" text="Base Price:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -83,17 +83,17 @@
 
                     <Label style="-fx-font-size: 14px;" text="Available:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
                     <CheckBox fx:id="availableCheckBox" style="-fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-               <rowConstraints>
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-                  <RowConstraints />
-               </rowConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
                 </GridPane>
             </VBox>
 

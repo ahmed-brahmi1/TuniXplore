@@ -145,7 +145,7 @@ public class EditHotelController {
             rootPane.getChildren().setAll(hotelDetailsView);
             // Get the current stage (window)
             Stage stage = (Stage) rootPane.getScene().getWindow();
-            stage.setWidth(900);  // Set desired width
+            stage.setWidth(1000);  // Set desired width
             stage.setHeight(800); // Set desired height
 
         } catch (IOException e) {

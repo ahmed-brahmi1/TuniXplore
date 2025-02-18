@@ -1,35 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane" prefHeight="800" prefWidth="1000" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.esprit.controllers.Hotel.Room.RoomListController">
-
-    <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
-          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+<AnchorPane fx:id="rootPane" prefHeight="800" prefWidth="1000" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.Hotel.Room.RoomListController">
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+    <VBox alignment="CENTER" spacing="20" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
 
         <!-- Header Section -->
         <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 20; -fx-pref-width: 100%;">
-            <Label text="🛏 Room Management" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
-            <Pane HBox.hgrow="ALWAYS"/>
-            <Button text="➕ Add Room" fx:id="addRoomButton" onAction="#addRoom"
-                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;
-                           -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 20;"/>
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="🛏 Room Management" />
+            <Pane HBox.hgrow="ALWAYS" />
+            <Button fx:id="addRoomButton" onAction="#addRoom" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px;                            -fx-font-weight: bold; -fx-padding: 8 15; -fx-background-radius: 20;" text="➕ Add Room" />
         </HBox>
 
         <!-- Room Cards Section -->
         <ScrollPane fitToWidth="true">
-            <HBox spacing="20" alignment="CENTER">
-                <GridPane fx:id="roomCardsPane" hgap="20" vgap="20" alignment="CENTER">
+            <HBox alignment="CENTER" spacing="20">
+                <GridPane fx:id="roomCardsPane" alignment="CENTER" hgap="20" vgap="20">
                     <columnConstraints>
-                        <ColumnConstraints percentWidth="33"/>
-                        <ColumnConstraints percentWidth="33"/>
-                        <ColumnConstraints percentWidth="33"/>
+                        <ColumnConstraints percentWidth="33" />
+                        <ColumnConstraints percentWidth="33" />
+                        <ColumnConstraints percentWidth="33" />
                     </columnConstraints>
                 </GridPane>
             </HBox>
         </ScrollPane>
+    </VBox>
+    <VBox prefHeight="800.0" prefWidth="220.0" style="-fx-background-color: #696969;">
+        <children>
+            <ImageView fitHeight="118.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@images/tuni.png" />
+                </image>
+            </ImageView>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="290.0" styleClass="GestionUser" text="Gestion des utilisateurs" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="30.0" />
+                </VBox.margin>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="291.0" styleClass="GestionUser" text="Gestion des hôtels" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="292.0" styleClass="GestionUser" text="Gestion des voitures" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="297.0" styleClass="GestionUser" text="Gestion des vols" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="70.0" prefWidth="307.0" styleClass="GestionUser" text="Gestion des forums" textFill="WHITE">
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+                <font>
+                    <Font size="17.0" />
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" style="-fx-background-color: transparent;" />
+
+        </children>
     </VBox>
 </AnchorPane>

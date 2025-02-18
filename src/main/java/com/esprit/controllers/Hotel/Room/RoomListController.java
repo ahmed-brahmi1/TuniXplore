@@ -43,7 +43,8 @@ public class RoomListController {
 
     public void setHotelId(int id) {
         hotelId = id;
-        loadRooms(); // Reload rooms when hotel is set
+        System.out.println("Hotel ID set to: " + hotelId);
+        loadRooms();
     }
 
     @FXML
@@ -146,7 +147,7 @@ public class RoomListController {
     @FXML
     public void addRoom() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/esprit/demo1/room-add.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GestionHotel/room-add.fxml"));
             Parent root = fxmlLoader.load();
             RoomAddController controller = fxmlLoader.getController();
             controller.setHotelId(hotelId);
