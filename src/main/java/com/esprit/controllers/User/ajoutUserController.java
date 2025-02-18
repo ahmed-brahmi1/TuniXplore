@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class ajoutUserController {
@@ -34,6 +31,9 @@ public class ajoutUserController {
 
     @FXML
     private TextField mdp;
+
+    @FXML
+    private PasswordField confirmer;
 
     @FXML
     private TextField nom;
@@ -138,12 +138,22 @@ public class ajoutUserController {
             // ✅ Vérification du téléphone (exactement 8 chiffres)
             if (!telText.matches("\\d{8}")) {
                 erreurs.append("- Le numéro de téléphone doit contenir exactement 8 chiffres.\n");
-            } else {
+            }
+            // ✅ Vérification de la correspondance des mots de passe
+            String mdpConfirmation = confirmer.getText().trim();
+            if (!mdpUser.equals(mdpConfirmation)) {
+                erreurs.append("- Les mots de passe ne correspondent pas.\n");
+            }else {
                 try {
                     telUser = Integer.parseInt(telText);
                 } catch (NumberFormatException e) {
                     erreurs.append("- Le numéro de téléphone doit être un nombre valide.\n");
                 }}
+            // Vérifier si l'email existe déjà dans la base
+            ServiceUser serviceUserEmail = new ServiceUser();
+            if (serviceUserEmail.emailExiste(emailUser)) {
+                erreurs.append("- Cet email est déjà utilisé. Veuillez en choisir un autre.\n");
+            }
 
             // ✅ Afficher toutes les erreurs ensemble
             if (erreurs.length() > 0) {

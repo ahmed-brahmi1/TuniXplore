@@ -50,9 +50,18 @@ public class AddParrainageByAdminController {
         loadUsers();
     }
 
+
+
+
+
+
+
+
+
+
     // Charger tous les utilisateurs dans la ComboBox
     private void loadUsers() {
-        List<User> userList = userService.getAllUsers(); // Récupérer liste complète
+        List<User> userList = userService.getAllUsers();
         ObservableList<User> observableUsers = FXCollections.observableArrayList(userList);
 
         // Associer le prénom et nom comme affichage dans la ComboBox

@@ -144,6 +144,10 @@ public class AddUserByAdminController {
                     erreurs.append("- Le numéro de téléphone doit être un nombre valide.\n");
                 }
             }
+            ServiceUser serviceUserEmail = new ServiceUser();
+            if (serviceUserEmail.emailExiste(emailUser)) {
+                erreurs.append("- Cet email est déjà utilisé. Veuillez en choisir un autre.\n");
+            }
 
             // ✅ Afficher toutes les erreurs ensemble
             if (erreurs.length() > 0) {

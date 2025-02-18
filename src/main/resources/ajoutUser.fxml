@@ -62,7 +62,7 @@
          </font>
       </Label>
       <TextField fx:id="nom" layoutX="445.0" layoutY="169.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="150.0" promptText="Nom" />
-      <Button fx:id="btn" layoutX="470.0" layoutY="468.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleInscription" prefHeight="50.0" prefWidth="250.0" styleClass="loginButton" text="S'inscrire" textFill="WHITE">
+      <Button fx:id="btn" layoutX="470.0" layoutY="518.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleInscription" prefHeight="50.0" prefWidth="250.0" styleClass="loginButton" text="S'inscrire" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -83,5 +83,6 @@
       </Button>
       <ComboBox fx:id="g" layoutX="445.0" layoutY="288.0" prefWidth="150.0" promptText="Genre" />
       <PasswordField fx:id="mdp" layoutX="445.0" layoutY="389.0" prefHeight="40.0" prefWidth="334.0" promptText="Mot de passe" />
+      <PasswordField fx:id="confirmer" layoutX="445.0" layoutY="447.0" prefHeight="40.0" prefWidth="334.0" promptText="Confirmez votre mot de passe" />
    </children>
 </AnchorPane>

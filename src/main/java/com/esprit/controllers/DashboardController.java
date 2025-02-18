@@ -164,6 +164,10 @@ public class DashboardController {
         }
         ((Stage) Updatebtn.getScene().getWindow()).close();
     }
+
+
+
+
     @FXML
     private void naviguerVersAjout() {
         // Naviguer vers l'interface AddUserByAdmin

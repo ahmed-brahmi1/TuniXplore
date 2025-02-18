@@ -179,4 +179,19 @@ public class ServiceUser implements CrudService<User>{
         }
         return userList;
     }
+
+    public boolean emailExiste(String email) {
+        String req = "SELECT COUNT(*) FROM `user` WHERE email = ?";
+        try {
+            PreparedStatement prep = connection.prepareStatement(req);
+            prep.setString(1, email);
+            ResultSet rs = prep.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0; // Si COUNT(*) > 0, l'email existe déjà
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la vérification de l'email : " + e.getMessage());
+        }
+        return false;
+    }
 }
