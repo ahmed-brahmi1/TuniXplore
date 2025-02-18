@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.DashboardController">
+
+    <!-- Sidebar -->
+    <VBox layoutX="0" layoutY="0" prefWidth="200" prefHeight="600"
+          style="-fx-background-color: #333; -fx-padding: 15;">
+
+        <ImageView fitHeight="80" fitWidth="80" style="-fx-padding: 10;" />
+
+        <Button text="Gestion des utilisateurs" onAction="#showGestionUtilisateurs"
+                style="-fx-background-color: #555; -fx-text-fill: white;"/>
+        <Button text="Gestion des hôtels" onAction="#showGestionHotels"
+                style="-fx-background-color: #555; -fx-text-fill: white;"/>
+        <Button text="Gestion des voitures" onAction="#showGestionVoitures"
+                style="-fx-background-color: #555; -fx-text-fill: white;"/>
+        <Button text="Gestion des vols" onAction="#showGestionVols"
+                style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+        <Button text="Gestion des forums" onAction="#showGestionForums"
+                style="-fx-background-color: #555; -fx-text-fill: white;"/>
+    </VBox>
+
+    <!-- Main Content Area -->
+    <StackPane fx:id="contentArea" layoutX="200" layoutY="0" prefWidth="800" prefHeight="600"
+               style="-fx-background-color: #f4f4f4;" />
+</AnchorPane>

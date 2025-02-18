@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 
+
 import java.io.IOException;
 
 public class HelloApplication extends Application {
@@ -16,12 +17,12 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Load the FXML file and connect to the controller
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("vol.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/vol/Vol.fxml"));
         AnchorPane root = fxmlLoader.load();  // Load the FXML layout
 
-        // Create the scene and set it on the stage
-        Scene scene = new Scene(root);
-        stage.setTitle("Flight Management");
+        Scene scene = new Scene(root, 1000, 600);
+
+        stage.setTitle("Flight Management System");
         stage.setScene(scene);
         stage.show();  // Show the window
     }

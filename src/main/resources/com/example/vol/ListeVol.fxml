@@ -32,9 +32,10 @@
     </TableView>
 
     <!-- Back Button with styling -->
-    <Button text="Back" layoutX="350" layoutY="380"
+    <Button fx:id="backButton" text="Back" layoutX="350" layoutY="380"
             style="-fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px 20px;"
             onAction="#goBack" />
+
 
     <!-- Add some padding and spacing for better visual appeal -->
     <VBox layoutX="20" layoutY="420" spacing="10">
