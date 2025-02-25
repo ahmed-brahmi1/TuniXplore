@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="580.0" prefWidth="780.0" stylesheets="@styles/discussions.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.esprit.controllers.PostC">
+   <children>
+      <Pane layoutX="-6.0" prefHeight="580.0" prefWidth="126.0" styleClass="side-bar">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="231.0" prefHeight="18.0" prefWidth="137.0">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.3em">
+                     <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Admines" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="289.0" prefHeight="18.0" prefWidth="137.0">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" glyphName="HOTEL" size="1.3em">
+                     <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Hotels" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="347.0" prefHeight="18.0" prefWidth="137.0">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" glyphName="PLANE" size="1.3em">
+                     <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Vols" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="463.0" prefHeight="18.0" prefWidth="137.0">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" glyphName="ENVELOPE" size="1.3em">
+                     <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Discussions" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label layoutX="42.0" layoutY="10.0" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="405.0" prefHeight="18.0" prefWidth="137.0">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" glyphName="CAR" size="1.3em">
+                     <HBox.margin>
+                        <Insets left="8.0" right="8.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Voitures" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label layoutX="42.0" layoutY="10.0" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="23.0" layoutY="522.0" prefHeight="18.0" prefWidth="137.0">
+               <children>
+                  <FontAwesomeIcon fill="WHITE" glyphName="COMMENTS" size="1.3em">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </FontAwesomeIcon>
+                  <Label text="Forum" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Label layoutX="42.0" layoutY="10.0" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <ImageView fitHeight="54.0" fitWidth="163.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/tunixplore.jpg" />
+               </image>
+            </ImageView>
+            <Circle fill="#eef0f2" layoutX="61.0" layoutY="134.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Circle>
+            <ImageView fitHeight="54.0" fitWidth="51.0" layoutX="36.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@assets/aziz.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="19.0" layoutY="172.0" prefHeight="17.0" prefWidth="90.0" text="George Stones" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="120.0" layoutY="-1.0" prefHeight="580.0" prefWidth="665.0" style="-fx-background-color: white;">
+         <children>
+            <Pane layoutX="98.0" layoutY="43.0" prefHeight="118.0" prefWidth="470.0" styleClass="PostingPane">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="38.0" layoutX="65.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@assets/aziz.png" />
+                     </image>
+                  </ImageView>
+                  <Pane layoutX="110.0" layoutY="15.0" prefHeight="38.0" prefWidth="328.0" styleClass="PostingPrompt">
+                     <children>
+                        <TextField fx:id="postTextField"  prefHeight="38.0" prefWidth="328.0" promptText="Ajoutez un post ici ......" style="-fx-background-color: transparent;" />
+                     </children></Pane>
+                  <Button fx:id="addImageButton" layoutX="84.0" layoutY="77.0" mnemonicParsing="false" styleClass="GalleryBTN" text="Ajouter une photo">
+                     <graphic>
+                        <FontAwesomeIcon fill="#0E70A6" glyphName="IMAGE" size="18" />
+                     </graphic>
+                  </Button>
+                  <Button fx:id="publishButton"  layoutX="355.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" styleClass="PostingBTN" text="Publier" textFill="WHITE" />
+                  <ImageView fx:id="postImageView" fitHeight="60.0" fitWidth="77.0" layoutX="5.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
+            <ListView fx:id="postsListView" layoutX="88.0" layoutY="190.0" prefHeight="360.0" prefWidth="490.0" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
